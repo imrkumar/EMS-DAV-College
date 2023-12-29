@@ -69,3 +69,6 @@
 .nav-link:hover{
   color: #da1212;
 }
+.short-heading{
+  overflow-y: hidden;
+}
