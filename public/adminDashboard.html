@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        Admin Dashboard
+    </title>
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/node_modules/bootstrap-icons/font/bootstrap-icons.css"/>
+    <link rel="stylesheet" href="CSS/style.css">
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <style>
+      #container {
+          display: flex;
+          width: 450px;
+          height: 100vh;
+          justify-content: center;
+          flex-direction: column;
+          align-items: center;
+       }
+      form{
+          border: 1px solid;
+          padding: 20px;
+
+      }
+
+    </style>
+</head>
+<body>
+  <header>
+    <nav class="nav-header">
+          <div class="logo-container"> <a href="index.html" ><img src="images/logo.png" class="main-logo"></a></div> 
+          <h1 class="long-heading"> DAV COLLEGE EVENT MANAGEMENT SYSTEM</h1>
+          <h1 class="short-heading">DEMS</h1>
+    </nav>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"         aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0" >
+            <li class="nav-item">
+              <a class="nav-link " aria-current="page" href="index.html">HOME</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/public/admin_login.html">ADMIN</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="dept_login.html">DEPARTMENT LOGIN</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="#">DEPT DETAILS</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">LOGOUT</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header><br>
+  <div class="container-fluid" id="container">
+    <form class="border border-dark p-lg-5 rounded-3">
+      <h2 class="mb-4" style="overflow-y: hidden;">Admin Dashboard</h2>
+      <dl>
+        <dt><label class="form-label">Select Department</label></dt>
+        <dd>
+          <select class="form-select">
+            <option>Select Department</option>
+            <option>Computer Department</option>
+            <option>Computer Department</option>
+            <option>Computer Department</option>
+            <option>Computer Department</option>
+          </select>
+        </dd>
+        <dt><label class="form-label">Username</label></dt>
+        <dd><input type="text" class="form-control"></dd>
+        <dt><label class="form-label">Password</label></dt>
+        <dd><input type="password" class="form-control"></dd>
+        <dt><label class="form-label">Email id</label></dt>
+        <dd><input type="email" class="form-control"></dd>
+      </dl>
+      <div class="text-center mt-4"><button class="btn btn bg-success  text-white ">Create</button>
+        <button class="btn btn-danger ">Clear</button>
+      </div>
+    </form>          
+  </div> 
+</body>
+</html>
