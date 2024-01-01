@@ -31,14 +31,14 @@
             <dd><input type="password"class="form-control" id="password"></dd>
      
         </dl>
-        <button class="btn btn-primary w-100 mt-2">login</button>
+        <button class="btn btn-primary w-100 mt-2" type="submit">login</button>
         </form>
     </div>
     <script>
         document.getElementById('adminForm').addEventListener('submit',function(e){
             e.preventDefault();
             const formData = new FormData(this);
-            fetch('/adminLogin',{
+            fetch('/adminlogin',{
                 method:'POST',
                 body: formData  
             })
@@ -53,7 +53,7 @@
         
       })
       .catch(error => {
-        console.error('Error:', error);
+        console.log('Error:', error);
         
       });
 

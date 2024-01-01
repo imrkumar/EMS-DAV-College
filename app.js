@@ -32,7 +32,7 @@ app.post('/adminLogin',(req,res)=>{
         res.status(401).json({ message: 'Invalid username or password' });
     }
     }
-)
+) 
 
 app.listen(port,(err)=>{
     if(err) console.log(err);
