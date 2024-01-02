@@ -26,18 +26,24 @@
 </head>
 <body>
     <div class="container-fluid" id="container">
-        <form class="border border-dark p-lg-5 rounded-3">
+        <form class="border border-dark p-lg-5 rounded-3" id="formData" action="POST">
             <h2 class="mb-4">Admin Login</h2>
             <dl>
-                <dt><label class="form-label">Username</label></dt>
-                <dd><input type="text" class="form-control"></dd>
-                <dt><label class="form-label">Password</label></dt>
-                <dd><input type="password" class="form-control"></dd>
+                <dt><label class="form-label" for="Username">Username</label></dt>
+                <dd><input type="text" class="form-control" id="username" name="username"></dd>
+                <dt><label class="form-label" for="password">Password</label></dt>
+                <dd><input type="password" class="form-control" name="password" id="password"></dd>
             </dl>
             <div class="text-center mt-4">
                 <button class="btn btn-danger ">LOGIN</button></div>
         </form>
         
        </div> 
+       <script>
+         fetch('http://localhost:9090/admin-login',{
+            method:"post",
+            data:FormData(this)
+         })
+       </script>
 </body>
 </html>

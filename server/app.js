@@ -13,10 +13,19 @@ app.get('/',(req,res)=>{
         "project":"ems"
     })
 })
-let formData={
-    "username":"admin",
-    "password":"admin"
-}
+// let formData={
+//     "username":"admin",
+//     "password":"admin"
+// }
+//admin-login
+app.post("/admin-login",(req,res)=>{
+    let username = req.body.username;
+    let password = req.body.password;
+    console.log(username);
+    console.log(password);
+    res.send("data received");
+}) 
+//admin-dashboard api
 app.post('/admin-dashboard',(req,res)=>{
      let department = req.body.department;
      let username = req.body.username;
