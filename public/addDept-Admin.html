@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/node_modules/bootstrap-icons/font/bootstrap-icons.css"/>
+   
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <style>
+         #container {
+          display: flex;
+          width: 450px;
+          height: 100vh;
+          justify-content: center;
+          flex-direction: column;
+          align-items: center;
+          
+       }
+      form{
+          border: 1px solid;
+          /* padding: 20px; */
+
+      }
+      #column{
+        flex-direction: column;
+      }
+      .btnCross {
+    margin-left: 227px;
+    margin-top: -15px;
+    border: none;
+}
+    </style>
+</head>
+
+<body>
+     <div class="container-fluid" id="container">
+    <form class="border border-dark p-lg-5 rounded-3">
+      <a href="adminDashboard.html" > <i class="bi bi-x-lg btnCross"></i></a>
+      <h2 class="mb-4" style="overflow-y: hidden;">Admin Dashboard </h2>
+      <dl>
+        <dt><label class="form-label">Select Department</label></dt>
+        <dd>
+          <select class="form-select">
+            <option>Select Department</option>
+            <option>Computer Department</option>
+            <option>Computer Department</option>
+            <option>Computer Department</option>
+            <option>Computer Department</option>
+          </select>
+        </dd>
+        <dt><label class="form-label">Username</label></dt>
+        <dd><input type="text" class="form-control"></dd>
+        <dt><label class="form-label">Password</label></dt>
+        <dd><input type="password" class="form-control"></dd>
+        <dt><label class="form-label">Email id</label></dt>
+        <dd><input type="email" class="form-control"></dd>
+      </dl>
+      <div class="text-center mt-4"><button class="btn btn bg-success  text-white ">Create</button>
+        <button class="btn btn-danger ">Clear</button>
+      </div>
+    </form>          
+  </div> 
+</body>
+</html>

@@ -24,7 +24,19 @@
           padding: 20px;
 
       }
+      #column{
+        flex-direction: column;
+      }
+      .editbtn{
+       
+        display: inline-block;
+        margin-left: 5px;
 
+      }
+      .delbtn{
+        display: inline-block;
+        
+      }
     </style>
 </head>
 <body>
@@ -34,35 +46,201 @@
           <h1 class="long-heading"> DAV COLLEGE EVENT MANAGEMENT SYSTEM</h1>
           <h1 class="short-heading">DEMS</h1>
     </nav>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-      <div class="container-fluid">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"         aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarText">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0" >
-            <li class="nav-item">
-              <a class="nav-link " aria-current="page" href="index.html">HOME</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/public/admin_login.html">ADMIN</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="dept_login.html">DEPARTMENT LOGIN</a>
-            </li>
-            
-            <li class="nav-item">
-              <a class="nav-link" href="#">DEPT DETAILS</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">LOGOUT</a>
-            </li>
-          </ul>
+      
+    </header>
+  
+  <div class="container-fluid">
+    <div class="row">
+      <div class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
+        <div class="offcanvas-md offcanvas-end bg-body-tertiary" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="sidebarMenuLabel">Company name</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="index.html">
+                 
+                  <span class="bi bi-house-fill"> HOME </span> 
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link d-flex align-items-center gap-2" href="dept_login.html">
+                  
+                 <span class="bi bi-door-open-fill"> DEPARTMENT LOGIN</span>
+                </a>
+              </li>
+              
+              <li class="nav-item">
+                <a class="nav-link d-flex align-items-center gap-2" href="addDept-Admin.html">
+                  
+                 <span class="bi bi-patch-plus-fill"> ADD DEPT-ADMIN</span>
+                </a>
+              </li>
+             
+            </ul>
+  
+          
+            <hr class="my-3">
+  
+            <ul class="nav flex-column mb-auto">
+             
+              <li class="nav-item">
+                <a class="nav-link d-flex align-items-center gap-2" href="#">
+                 
+                  <span class="bi bi-door-closed-fill">  SIGN OUT</span> 
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
-    </nav>
-  </header><br>
-  <div class="container-fluid" id="container">
+  
+      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+       
+  
+       
+  
+        <h2 style="overflow-y: hidden; text-align: center; margin: 20px 0px;">ADMIN DASHBOARD</h2>
+        <div class="table-responsive small">
+          <table class="table table-striped table-sm">
+            <thead>
+              <tr>
+                <th scope="col">DEPARTMENT</th>
+                <th scope="col">USERNAME</th>
+                <th scope="col">PASSWORD</th>
+                <th scope="col">EMAIL</th>
+                <th scope="col">EDIT/DELETE</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>PG DEPARTMENT OF COMPUTER SCIENCE</td>
+                <td>DAV comm</td>
+                <td>commerce123</td>
+                <td>commerce@gmail.com</td>
+                <td> <span> <button class="editbtn btn btn-primary"><span class="bi bi-pencil-square"></span></button>
+                <button class="btn btn-danger delbtn"><span class="bi bi-trash"></span></button></span></td>
+               
+              </tr>
+              <tr>
+                <td>1,002</td>
+                <td>placeholder</td>
+                <td>irrelevant</td>
+                <td>visual</td>
+                <td>layout</td>
+              </tr>
+              <tr>
+                <td>1,003</td>
+                <td>data</td>
+                <td>rich</td>
+                <td>dashboard</td>
+                <td>tabular</td>
+              </tr>
+              <tr>
+                <td>1,003</td>
+                <td>information</td>
+                <td>placeholder</td>
+                <td>illustrative</td>
+                <td>data</td>
+              </tr>
+              <tr>
+                <td>1,004</td>
+                <td>text</td>
+                <td>random</td>
+                <td>layout</td>
+                <td>dashboard</td>
+              </tr>
+              <tr>
+                <td>1,005</td>
+                <td>dashboard</td>
+                <td>irrelevant</td>
+                <td>text</td>
+                <td>placeholder</td>
+              </tr>
+              <tr>
+                <td>1,006</td>
+                <td>dashboard</td>
+                <td>illustrative</td>
+                <td>rich</td>
+                <td>data</td>
+              </tr>
+              <tr>
+                <td>1,007</td>
+                <td>placeholder</td>
+                <td>tabular</td>
+                <td>information</td>
+                <td>irrelevant</td>
+              </tr>
+              <tr>
+                <td>1,008</td>
+                <td>random</td>
+                <td>data</td>
+                <td>placeholder</td>
+                <td>text</td>
+              </tr>
+              <tr>
+                <td>1,009</td>
+                <td>placeholder</td>
+                <td>irrelevant</td>
+                <td>visual</td>
+                <td>layout</td>
+              </tr>
+              <tr>
+                <td>1,010</td>
+                <td>data</td>
+                <td>rich</td>
+                <td>dashboard</td>
+                <td>tabular</td>
+              </tr>
+              <tr>
+                <td>1,011</td>
+                <td>information</td>
+                <td>placeholder</td>
+                <td>illustrative</td>
+                <td>data</td>
+              </tr>
+              <tr>
+                <td>1,012</td>
+                <td>text</td>
+                <td>placeholder</td>
+                <td>layout</td>
+                <td>dashboard</td>
+              </tr>
+              <tr>
+                <td>1,013</td>
+                <td>dashboard</td>
+                <td>irrelevant</td>
+                <td>text</td>
+                <td>visual</td>
+              </tr>
+              <tr>
+                <td>1,014</td>
+                <td>dashboard</td>
+                <td>illustrative</td>
+                <td>rich</td>
+                <td>data</td>
+              </tr>
+              <tr>
+                <td>1,015</td>
+                <td>random</td>
+                <td>tabular</td>
+                <td>information</td>
+                <td>text</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </main>
+    </div>
+  </div>
+  
+    
+     
+   
+  
+  <!-- <div class="container-fluid" id="container">
     <form class="border border-dark p-lg-5 rounded-3">
       <h2 class="mb-4" style="overflow-y: hidden;">Admin Dashboard</h2>
       <dl>
@@ -87,6 +265,6 @@
         <button class="btn btn-danger ">Clear</button>
       </div>
     </form>          
-  </div> 
+  </div>  -->
 </body>
 </html>
