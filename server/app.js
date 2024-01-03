@@ -40,8 +40,8 @@ app.post("/admin-login",(req,res)=>{
     res.send("data received");
 }) 
 
-//admin-dashboard api
-app.post('/admin-dashboard',(req,res)=>{
+// AddDeptAdmin
+app.post('/deptAdmin',(req,res)=>{
      let department = req.body.department;
      let username = req.body.username;
      let password = req.body.password;
@@ -55,23 +55,24 @@ app.post('/admin-dashboard',(req,res)=>{
      mongoClient.connect(connectionString,(err,clientObject)=>{
         if(!err){
             let dbo = clientObject.db('DavEms');
-            dbo.collection('admindashboard').insertOne(data,(err,result)=>{
+            dbo.collection('DeptAdmin').insertOne(data,(err,result)=>{
                 if(!err){
                     console.log("record inserted")
                 }
             })
+    
         
         }
     })
      res.send("data received successfully");
 })
 
-   //get data
-    app.get('/getdata',(req,res)=>{
+   //admin dashboard
+    app.get('/admindashboard',(req,res)=>{
         mongoClient.connect(connectionString,(err,clientObject)=>{
             if(!err){
                 let dbo = clientObject.db('DavEms');
-                dbo.collection('admindashboard').find({}).toArray((err,documents)=>{
+                dbo.collection('DeptAdmin').find({}).toArray((err,documents)=>{
                     if(!err){
                         res.send(documents);
                     }
@@ -79,25 +80,41 @@ app.post('/admin-dashboard',(req,res)=>{
             }
         })
     })
-    app.post('/adddepartment',function(req,res){
-       let department= req.body.department;
-       let data = {
-        "department":department
-       }
-       console.log(department);
-       mongoClient.connect(connectionString,(err,clientObject)=>{
-        if(!err){
-            let dbo = clientObject.db('DavEms');
-            dbo.collection('department').insertOne(data,(err,result)=>{
-                if(!err){
-                    console.log("record inserted")
-                }
-            })
+
+    //department category route
+     app.get('/department',(req,res)=>{
+        mongoClient.connect(connectionString,(err,clientObject)=>{
+            if(!err){
+                let dbo = clientObject.db('DavEms');
+                dbo.collection('department').find({}).toArray((err,documents)=>{
+                    if(!err){
+                        res.send(documents);
+                    }
+                })
+            }
+        })
+     })
+
+
+    // app.post('/adddepartment',function(req,res){
+    //    let department= req.body.department;
+    //    let data = {
+    //     "department":department
+    //    }
+    //    console.log(department);
+    //    mongoClient.connect(connectionString,(err,clientObject)=>{
+    //     if(!err){
+    //         let dbo = clientObject.db('DavEms');
+    //         dbo.collection('department').insertOne(data,(err,result)=>{
+    //             if(!err){
+    //                 console.log("record inserted")
+    //             }
+    //         })
         
-        }
-    })
-    res.send("data inserted");
-    })
+    //     }
+    // })
+    // res.send("data inserted");
+    // })
     // app.get('/admin/login',(req,res)=>{
         
     //         mongoClient.connect(connectionString,(err,clientObject)=>{
