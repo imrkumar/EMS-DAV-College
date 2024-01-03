@@ -56,7 +56,11 @@
             method: 'POST',
             body: payload,
             })
-            .then(res => res.json())
+            .then((res)=>{
+                if(res.status==200){
+                    location.href="../public/adminDashboard.html"
+                }
+            })
             .then(data => console.log(data))
         })
                    </script>
