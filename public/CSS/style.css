@@ -66,6 +66,9 @@
 .long-heading{
     overflow-y: hidden;
 }
+.short-heading{
+  overflow-y: hidden;
+}
 .nav-link:hover{
   color: #da1212;
 }
