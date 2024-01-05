@@ -23,24 +23,20 @@
 
     </style>
 </head>
-<body>
+<body onload="loadDepartment()">
    <div class="container-fluid" id="container">
     
     <form class="border border-dark p-lg-5 rounded-3">
         <h2 class="mb-4">Department Login</h2>
         <dl>
             <dt><label class="form-label">Select Department</label></dt>
-            <dd><select class="form-select">
+            <dd><select class="form-select" id="dept" required>
                 <option>Select Department</option>
-                <option>Computer Department</option>
-                <option>Computer Department</option>
-                <option>Computer Department</option>
-                <option>Computer Department</option>
             </select></dd>
             <dt><label class="form-label">Username</label></dt>
-            <dd><input type="text" class="form-control"></dd>
+            <dd><input type="text" class="form-control" required></dd>
             <dt><label class="form-label">Password</label></dt>
-            <dd><input type="password" class="form-control"></dd>
+            <dd><input type="password" class="form-control" required></dd>
         </dl>
         <div class="text-center mt-4"><button class="btn btn bg-success  text-white ">Submit</button>
             <button class="btn btn-danger ">Cancel</button></div>
@@ -51,5 +47,26 @@
     </form>
     
    </div> 
+   <script>
+    function loadDepartment(){
+      fetch("http://localhost:9090/department",{
+        method:"GET",
+
+      }).then((response)=>{
+        
+         return response.json()
+      }).then((data)=>{
+       
+        for(item of data){
+         var option= document.createElement("option")
+         option.id="department"
+         option.value=item.department
+         
+         option.text=item.department
+         
+         document.getElementById("dept").append(option)
+        }
+    })}
+   </script>
 </body>
 </html>

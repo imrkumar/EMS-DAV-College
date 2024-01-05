@@ -114,157 +114,41 @@
                 <th scope="col">EDIT/DELETE</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>PG DEPARTMENT OF COMPUTER SCIENCE</td>
-                <td>DAV comm</td>
-                <td>commerce123</td>
-                <td>commerce@gmail.com</td>
-                <td> <span> <button class="editbtn btn btn-primary"><span class="bi bi-pencil-square"></span></button>
-                <button class="btn btn-danger delbtn"><span class="bi bi-trash"></span></button></span></td>
-               
-              </tr>
-              <tr>
-                <td>1,002</td>
-                <td>placeholder</td>
-                <td>irrelevant</td>
-                <td>visual</td>
-                <td>layout</td>
-              </tr>
-              <tr>
-                <td>1,003</td>
-                <td>data</td>
-                <td>rich</td>
-                <td>dashboard</td>
-                <td>tabular</td>
-              </tr>
-              <tr>
-                <td>1,003</td>
-                <td>information</td>
-                <td>placeholder</td>
-                <td>illustrative</td>
-                <td>data</td>
-              </tr>
-              <tr>
-                <td>1,004</td>
-                <td>text</td>
-                <td>random</td>
-                <td>layout</td>
-                <td>dashboard</td>
-              </tr>
-              <tr>
-                <td>1,005</td>
-                <td>dashboard</td>
-                <td>irrelevant</td>
-                <td>text</td>
-                <td>placeholder</td>
-              </tr>
-              <tr>
-                <td>1,006</td>
-                <td>dashboard</td>
-                <td>illustrative</td>
-                <td>rich</td>
-                <td>data</td>
-              </tr>
-              <tr>
-                <td>1,007</td>
-                <td>placeholder</td>
-                <td>tabular</td>
-                <td>information</td>
-                <td>irrelevant</td>
-              </tr>
-              <tr>
-                <td>1,008</td>
-                <td>random</td>
-                <td>data</td>
-                <td>placeholder</td>
-                <td>text</td>
-              </tr>
-              <tr>
-                <td>1,009</td>
-                <td>placeholder</td>
-                <td>irrelevant</td>
-                <td>visual</td>
-                <td>layout</td>
-              </tr>
-              <tr>
-                <td>1,010</td>
-                <td>data</td>
-                <td>rich</td>
-                <td>dashboard</td>
-                <td>tabular</td>
-              </tr>
-              <tr>
-                <td>1,011</td>
-                <td>information</td>
-                <td>placeholder</td>
-                <td>illustrative</td>
-                <td>data</td>
-              </tr>
-              <tr>
-                <td>1,012</td>
-                <td>text</td>
-                <td>placeholder</td>
-                <td>layout</td>
-                <td>dashboard</td>
-              </tr>
-              <tr>
-                <td>1,013</td>
-                <td>dashboard</td>
-                <td>irrelevant</td>
-                <td>text</td>
-                <td>visual</td>
-              </tr>
-              <tr>
-                <td>1,014</td>
-                <td>dashboard</td>
-                <td>illustrative</td>
-                <td>rich</td>
-                <td>data</td>
-              </tr>
-              <tr>
-                <td>1,015</td>
-                <td>random</td>
-                <td>tabular</td>
-                <td>information</td>
-                <td>text</td>
-              </tr>
+            <tbody id="tbody">
+             
             </tbody>
           </table>
         </div>
       </main>
     </div>
   </div>
-  
-    
-     
+<script>
+  fetch("http://localhost:9090/admindashboard",{
+    method:"get",
+
+  }).then((res)=>{
+    return res.json()
+  }).then((data)=>{
+    for(let record of data){
    
-  
-  <!-- <div class="container-fluid" id="container">
-    <form class="border border-dark p-lg-5 rounded-3">
-      <h2 class="mb-4" style="overflow-y: hidden;">Admin Dashboard</h2>
-      <dl>
-        <dt><label class="form-label">Select Department</label></dt>
-        <dd>
-          <select class="form-select">
-            <option>Select Department</option>
-            <option>Computer Department</option>
-            <option>Computer Department</option>
-            <option>Computer Department</option>
-            <option>Computer Department</option>
-          </select>
-        </dd>
-        <dt><label class="form-label">Username</label></dt>
-        <dd><input type="text" class="form-control"></dd>
-        <dt><label class="form-label">Password</label></dt>
-        <dd><input type="password" class="form-control"></dd>
-        <dt><label class="form-label">Email id</label></dt>
-        <dd><input type="email" class="form-control"></dd>
-      </dl>
-      <div class="text-center mt-4"><button class="btn btn bg-success  text-white ">Create</button>
-        <button class="btn btn-danger ">Clear</button>
-      </div>
-    </form>          
-  </div>  -->
+      let tr=   document.createElement("tr")
+      tr.innerHTML=
+      `
+        
+      
+                <td>${record.department}</td>
+                <td>${record.username}</td>
+                <td>${record.password}</td>
+                <td>${record.email}</td>
+                <td> <span> <button class="editbtn btn btn-primary"><span class="bi bi-pencil-square"></span></button>
+                <button class="btn btn-danger delbtn"><span class="bi bi-trash"></span></button></span></td>
+               
+           
+
+      `
+      document.getElementById("tbody").append(tr)
+    }
+  })
+</script>
 </body>
 </html>

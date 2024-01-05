@@ -34,25 +34,25 @@
     </style>
 </head>
 
-<body>
+<body onload="loadDepartment()">
      <div class="container-fluid" id="container">
     <form class="border border-dark p-lg-5 rounded-3" id="Data">
       <a href="adminDashboard.html" > <i class="bi bi-x-lg btnCross"></i></a>
-      <h2 class="mb-4" style="overflow-y: hidden;">Add Dept-admin </h2
+      <h2 class="mb-4" style="overflow-y: hidden;">Add Dept-admin </h2>
       <dl>
         <dt><label class="form-label">Select Department</label></dt>
         <dd>
-          <select class="form-select" id="dept">
+          <select class="form-select" id="dept" required>
             <option>Select Department</option>
             
           </select>
         </dd>
         <dt><label class="form-label" for="username" >Username</label></dt>
-        <dd><input type="text" class="form-control" id="username" name="username"></dd>
+        <dd><input type="text" class="form-control" id="username" name="username" required></dd>
         <dt><label class="form-label" for="password">Password</label></dt>
-        <dd><input type="password" class="form-control" id="password" name="password"></dd>
+        <dd><input type="password" class="form-control" id="password" name="password" required></dd>
         <dt><label class="form-label" for="email">Email id</label></dt>
-        <dd><input type="email" class="form-control" id="email" name="email"></dd>
+        <dd><input type="email" class="form-control" id="email" name="email" required></dd>
       </dl>
       <div class="text-center mt-4"><button id="submit" class="btn btn bg-success  text-white ">Create</button>
         <button class="btn btn-danger ">Clear</button>
@@ -60,7 +60,7 @@
     </form>          
   </div> 
   <script>
-    
+    function loadDepartment(){
       fetch("http://localhost:9090/department",{
         method:"GET",
 
@@ -78,7 +78,7 @@
          
          document.getElementById("dept").append(option)
         }
-    })
+    })}
     const form = document.getElementById('Data');
         form.addEventListener('submit', function(e) {
            

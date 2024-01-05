@@ -26,11 +26,12 @@ app.post("/admin-login",(req,res)=>{
             let dbo = clientObject.db('DavEms');
             dbo.collection('adminlogin').find({}).toArray((err,documents)=>{
                 if(!err){
-                    if(username==documents[0].Admin && password==documents[0].Password){
+                    if(username===documents[0].Admin && password===documents[0].Password){
                         res.status(200)
                       console.log("login success")  
                     }else{
-                        console.log("data does not match");
+                        res.status(401)
+                        console.log("data does not match")
                     }
                     
                 }
