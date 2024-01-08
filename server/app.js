@@ -96,38 +96,37 @@ app.post('/deptAdmin',(req,res)=>{
         })
      })
 
+     //department admin login
+     app.post('/department/login',(req,res)=>{
+        let department = req.body.department;
+        let username = req.body.username;
+        let password = req.body.password;
+       
+        mongoClient.connect(connectionString,(err,clientObject)=>{
+            if(!err){
+                let dbo = clientObject.db('DavEms');
+                dbo.collection('DeptAdmin').find({department:department}).toArray((err,documents)=>{
+                   
+                    if(!err){
+                        if(department==documents[0].department && username==documents[0].username && password==documents[0].password){
 
-    // app.post('/adddepartment',function(req,res){
-    //    let department= req.body.department;
-    //    let data = {
-    //     "department":department
-    //    }
-    //    console.log(department);
-    //    mongoClient.connect(connectionString,(err,clientObject)=>{
-    //     if(!err){
-    //         let dbo = clientObject.db('DavEms');
-    //         dbo.collection('department').insertOne(data,(err,result)=>{
-    //             if(!err){
-    //                 console.log("record inserted")
-    //             }
-    //         })
-        
-    //     }
-    // })
-    // res.send("data inserted");
-    // })
-    // app.get('/admin/login',(req,res)=>{
-        
-    //         mongoClient.connect(connectionString,(err,clientObject)=>{
-    //             if(!err){
-    //                 let dbo = clientObject.db('DavEms');
-    //                 dbo.collection('adminlogin').find({}).toArray((err,documents)=>{
-    //                     if(!err){
-    //                        res.send(documents)
-    //                     }
-    //                 })
-    //             }
-    //         })
-    // })
+                            res.status(200)
+
+                          console.log("login success")  
+                        }else{
+                            res.status(401)
+                            console.log('login denied')
+                        } 
+                }
+                })
+            
+            }
+        })
+        res.send('data received successfully');
+     })
+    
 app.listen(9090)
 console.log("server started")
+
+
+
