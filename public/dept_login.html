@@ -68,6 +68,44 @@
          document.getElementById("dept").append(option)
         }
     })}
+    const form = document.getElementById('Data');
+        form.addEventListener('submit', function(e) {
+           
+            e.preventDefault();
+           
+            let department = document.getElementById('dept').value;
+            let username= document.getElementById('username').value;
+            let password= document.getElementById('password').value;
+            
+            let data ={
+              "department":department,
+              "username":username,
+              "password":password,
+             
+            }
+            // const formData = new FormData(form);
+            
+            const payload = new URLSearchParams(data);
+           
+            fetch('http://localhost:9090/department/login', {
+            method: 'POST',
+            body: payload,
+            })
+            .then((res)=>{
+                if(res.status==200){
+                    location.href="deptDashboard.html";
+                }
+               
+                return res.json(data)
+            })
+            .then((data)=>{
+              console.log(data)
+             
+            })
+            .catch((error)=>{
+              console.log(error)
+            })
+        })
    </script>
 </body>
 </html>

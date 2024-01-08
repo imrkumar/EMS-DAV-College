@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,109 +8,124 @@
 
     </title>
     <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="/node_modules/bootstrap-icons/font/bootstrap-icons.css"/>
+    <link rel="stylesheet" href="/node_modules/bootstrap-icons/font/bootstrap-icons.css" />
     <link rel="stylesheet" href="CSS/style.css">
     <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <link rel="icon" href="images/logo.png">
     <style>
-        #deptnamehead{
-          overflow-y: hidden;
-          text-align: center;
-          padding: 20px;
-          font-style: italic;
+        #deptnamehead {
+            overflow-y: hidden;
+            text-align: center;
+            padding: 20px;
+            font-style: italic;
         }
-        #deptdashboard{
-          text-align: center;
-          border-style: none;
-          width: auto;
+
+        #deptdashboard {
+            text-align: center;
+            border-style: none;
+            width: auto;
         }
-        p{
+
+        p {
             font-size: 30px;
         }
-       .card{
-        margin: 0 auto;
-        font-size: 20px;
-        width: 515px;
-        border: 3px solid whitesmoke;
-       }
-       #marginset{
-        margin-left: 47px; 
-        color: #da1212
-       }
-       #marginset2{
-       margin-left: 5px;
-        color: #da1212;
-       }
-       #marginset3{
-       margin-left: 40px;
-        color: #da1212;
-       }
-       @media screen and (max-width:520px) {
-        .card{
-            width: 330px;
-            
-       }
-       p{
-        font-size: 21px;
-       }
-       #marginset{
-        margin-left: 33px;
-       }
-       #marginset3{
-        margin-left: 28px;
-       }
-    
-}
 
+        .card {
+            margin: 0 auto;
+            font-size: 20px;
+            width: 515px;
+            border: 3px solid whitesmoke;
+        }
+
+        #marginset {
+            margin-left: 47px;
+            color: #da1212
+        }
+
+        #marginset2 {
+            margin-left: 5px;
+            color: #da1212;
+        }
+
+        #marginset3 {
+            margin-left: 40px;
+            color: #da1212;
+        }
+
+        @media screen and (max-width:520px) {
+            .card {
+                width: 330px;
+
+            }
+
+            p {
+                font-size: 21px;
+            }
+
+            #marginset {
+                margin-left: 33px;
+            }
+
+            #marginset3 {
+                margin-left: 28px;
+            }
+
+        }
     </style>
 </head>
+
 <body>
     <header>
         <nav class="nav-header">
-              <div class="logo-container"> <a href="index.html" ><img src="images/logo.png" class="main-logo"></a></div> 
-              <h1 class="long-heading"> DAV COLLEGE EVENT MANAGEMENT SYSTEM</h1>
-              <h1 class="short-heading">DEMS</h1>
+            <div class="logo-container"> <a href="index.html"><img src="images/logo.png" class="main-logo"></a></div>
+            <h1 class="long-heading"> DAV COLLEGE EVENT MANAGEMENT SYSTEM</h1>
+            <h1 class="short-heading">DEMS</h1>
         </nav>
-          <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarText">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0" >
-                  <li class="nav-item">
-                    <a class="nav-link " aria-current="page" href="index.html">HOME</a>
-                  </li>
-                  
-                  
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">CONTACT US</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="aboutus.html">ABOUT US</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="dept_login.html">LOGOUT</a>
-                  </li>
-                </ul>
-              </div>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+                    aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarText">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link " aria-current="page" href="index.html">HOME</a>
+                        </li>
+
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">CONTACT US</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="aboutus.html">ABOUT US</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="dept_login.html">LOGOUT</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-          </nav>
-        </header>
-        <h2 class="mb-4" id="deptnamehead">WELCOME TO <span></span></h2>
-        <div class="card "  >
-            <div class="card-body" style="height: auto;">
-              
-              <p class="card-text">Add Department Activity     
-                <a href="#" class="card-link bi bi-file-earmark-plus-fill "  id="marginset" ></a></p>
-              <p class="card-text">Update Department Activity  
-                <a href="#" class="card-link bi bi-arrow-clockwise" id="marginset2" ></a></p>
-              <p class="card-text">View Department Activity   
-                 <a href="#" class="card-link bi bi-eye-fill" id="marginset3"></a></p>
-             
-             </div>
-           
-            </div>
-    
+        </nav>
+    </header>
+    <h2 class="mb-4" id="deptnamehead">WELCOME TO <span></span></h2>
+    <div class="card ">
+        <div class="card-body" style="height: auto;">
+
+            <p class="card-text">Add Department Activity
+                <a href="#" class="card-link bi bi-file-earmark-plus-fill " id="marginset"></a>
+            </p>
+            <p class="card-text">Update Department Activity
+                <a href="#" class="card-link bi bi-arrow-clockwise" id="marginset2"></a>
+            </p>
+            <p class="card-text">View Department Activity
+                <a href="#" class="card-link bi bi-eye-fill" id="marginset3"></a>
+            </p>
+
+        </div>
+
+    </div>
+
 </body>
+
 </html>
