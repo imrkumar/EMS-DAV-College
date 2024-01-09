@@ -72,3 +72,8 @@
 .nav-link:hover{
   color: #da1212;
 }
+#ue-heading{
+  text-align: center;
+  overflow-y: hidden;
+  margin-top: 10px;
+}
