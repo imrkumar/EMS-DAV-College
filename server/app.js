@@ -137,5 +137,27 @@ app.post("/department/login", (req, res) => {
   res.send("data received successfully");
 });
 
+// add department activity
+app.post('/department/activity',(req,res)=>{
+  // let date = new Date(req.body.eventDate); 
+   let data = {
+    "Date": req.body.eventDate,
+    "eventNotice":req.body.eventNotice
+   }
+  console.log(data)
+  mongoClient.connect(connectionString, (err, clientObject) => {
+    if (!err) {
+      let dbo = clientObject.db("DavEms");
+      dbo.collection("DeptActivity").insertOne(data, (err, result) => {
+        if (!err) {
+          console.log("record inserted");
+        }
+      });
+    }
+  });
+  
+   res.send("data received successfully")
+})
 app.listen(9090);
 console.log("server started");
+

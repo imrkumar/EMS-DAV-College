@@ -27,7 +27,7 @@
 <body onload="loadDepartment()">
    <div class="container-fluid" id="container">
     
-    <form class="border border-dark p-lg-5 rounded-3">
+    <form class="border border-dark p-lg-5 rounded-3" id="data">
         <h2 class="mb-4">Department Login</h2>
         <dl>
             <dt><label class="form-label">Select Department</label></dt>
@@ -35,7 +35,7 @@
                 <option>Select Department</option>
             </select></dd>
             <dt><label class="form-label" for="username">Username</label></dt>
-            <dd><input type="text" class="form-control" id="username" name="password" required></dd>
+            <dd><input type="text" class="form-control" id="username" name="username" required></dd>
             <dt><label class="form-label" for="password">Password</label></dt>
             <dd><input type="password" id="password" class="form-control" name="password"  required></dd>
         </dl>
@@ -68,7 +68,7 @@
          document.getElementById("dept").append(option)
         }
     })}
-    const form = document.getElementById('Data');
+    const form = document.getElementById('data');
         form.addEventListener('submit', function(e) {
            
             e.preventDefault();
