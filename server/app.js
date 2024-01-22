@@ -170,7 +170,7 @@ app.post('/department/activity',upload.single('eventNotice'), (req,res)=>{
     }
   });
    console.log(req.body, req.file)
-
+   
    res.send("data received successfully") 
 })
 app.listen(9090);
