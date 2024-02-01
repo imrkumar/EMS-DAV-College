@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=
@@ -16,101 +15,97 @@
             justify-content: center;
             flex-direction: column;
             align-items: center;
-        }
-
-        form {
+         }
+        form{
             border: 1px solid;
             padding: 20px;
 
         }
+
     </style>
 </head>
-
 <body onload="loadDepartment()">
-    <div class="container-fluid" id="container">
+   <div class="container-fluid" id="container">
+    
+    <form class="border border-dark p-lg-5 rounded-3" id="data">
+        <h2 class="mb-4">Department Login</h2>
+        <dl>
+            <dt><label class="form-label">Select Department</label></dt>
+            <dd><select class="form-select" id="dept" required>
+                <option>Select Department</option>
+            </select></dd>
+            <dt><label class="form-label" for="username">Username</label></dt>
+            <dd><input type="text" class="form-control" id="username" name="username" required></dd>
+            <dt><label class="form-label" for="password">Password</label></dt>
+            <dd><input type="password" id="password" class="form-control" name="password"  required></dd>
+        </dl>
+        <div class="text-center mt-4"><button class="btn btn bg-success  text-white ">Submit</button>
+            <button class="btn btn-danger ">Cancel</button></div>
+        <div class="text-center mt-4">
+            <span class="me-3"><a href="">Change Password</a></span>
+            <span><a href="">Forget Password</a></span>
+        </div>
+    </form>
+    
+   </div> 
+   <script>
+    function loadDepartment(){
+      fetch("http://localhost:9090/department",{
+        method:"GET",
 
-        <form class="border border-dark p-lg-5 rounded-3" id="data">
-            <h2 class="mb-4">Department Login</h2>
-            <dl>
-                <dt><label class="form-label">Select Department</label></dt>
-                <dd><select class="form-select" id="dept" required>
-                        <option>Select Department</option>
-                    </select></dd>
-                <dt><label class="form-label" for="username">Username</label></dt>
-                <dd><input type="text" class="form-control" id="username" name="username" required></dd>
-                <dt><label class="form-label" for="password">Password</label></dt>
-                <dd><input type="password" id="password" class="form-control" name="password" required></dd>
-            </dl>
-            <div class="text-center mt-4"><button class="btn btn bg-success  text-white ">Submit</button>
-                <button class="btn btn-danger ">Cancel</button>
-            </div>
-            <div class="text-center mt-4">
-                <span class="me-3"><a href="">Change Password</a></span>
-                <span><a href="">Forget Password</a></span>
-            </div>
-        </form>
-
-    </div>
-    <script>
-        function loadDepartment() {
-            fetch("http://localhost:9090/department", {
-                method: "GET",
-
-            }).then((response) => {
-
-                return response.json()
-            }).then((data) => {
-
-                for (item of data) {
-                    var option = document.createElement("option")
-                    option.id = "department"
-                    option.value = item.department
-
-                    option.text = item.department
-
-                    document.getElementById("dept").append(option)
-                }
-            })
+      }).then((response)=>{
+        
+         return response.json()
+      }).then((data)=>{
+       
+        for(item of data){
+         var option= document.createElement("option")
+         option.id="department"
+         option.value=item.department
+         
+         option.text=item.department
+         
+         document.getElementById("dept").append(option)
         }
-        const form = document.getElementById('data');
-        form.addEventListener('submit', function (e) {
-
+    })}
+    const form = document.getElementById('data');
+        form.addEventListener('submit', function(e) {
+           
             e.preventDefault();
-
+           
             let department = document.getElementById('dept').value;
-            let username = document.getElementById('username').value;
-            let password = document.getElementById('password').value;
-
-            let data = {
-                "department": department,
-                "username": username,
-                "password": password,
-
+            let username= document.getElementById('username').value;
+            let password= document.getElementById('password').value;
+            
+            let data ={
+              "department":department,
+              "username":username,
+              "password":password,
+             
             }
             // const formData = new FormData(form);
-
+            
             const payload = new URLSearchParams(data);
-
+           
             fetch('http://localhost:9090/department/login', {
-                method: 'POST',
-                body: payload,
+            method: 'POST',
+            body: payload,
             })
-                .then((res) => {
-                    if (res.status == 200) {
-                        location.href = "deptDashboard.html";
-                    }
-
-                    return res.json(data)
-                })
-                .then((data) => {
-                    console.log(data)
-
-                })
-                .catch((error) => {
-                    console.log(error)
-                })
+            .then((res)=>{
+                if(res.status==200){
+                    location.href="deptDashboard.html";
+                }
+               
+                return res.json(data)
+            })
+            .then((data)=>{
+              console.log(data)
+             
+            })
+            .catch((error)=>{
+              console.log(error)
+            })
         })
-    </script>
+   </script>
 </body>
-
 </html>

@@ -1,19 +1,23 @@
 let express = require("express");
 let cors = require("cors");
 let app = express();
+let fs = require('fs');
+let multer = require('multer');
 let mongoClient = require("mongodb").MongoClient;
 let bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
 let connectionString = "mongodb://127.0.0.1:27017";
+let mongoose = require("mongoose");
+let path = require('path');
+const { data } = require("jquery");
 app.use(bodyParser.json());
 app.use(cors());
-//default
-app.get("/", (req, res) => {
+
+app.get('/',(req,res)=>{
   res.send({
-    name: "dav college",
-    project: "ems",
-  });
-});
+    "about":"This is Event management of DAV College."
+  })
+})
 
 //admin-login 
 
@@ -124,7 +128,7 @@ app.post("/department/login", (req, res) => {
               username == documents[0].username &&
               password == documents[0].password
             ) {
-              res.status(200);
+              res.redirect('/public/index.html');
               console.log("login success");
             } else {
               res.status(401);
@@ -137,14 +141,24 @@ app.post("/department/login", (req, res) => {
   res.send("data received successfully");
 });
 
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, '../public/backend/images')
+  },
+  filename: function (req, file, cb) {
+    cb(null, `${Date.now()}-${file.originalname}`)
+  }
+})
+
+const upload = multer({ storage: storage })
+// const upload = multer({ dest: '../public/backend/images' }) 
+
+
 // add department activity
-app.post('/department/activity',(req,res)=>{
-  // let date = new Date(req.body.eventDate); 
-   let data = {
-    "Date": req.body.eventDate,
-    "eventNotice":req.body.eventNotice
-   }
-  console.log(data)
+app.post('/department/activity',upload.single('eventNotice'), (req,res)=>{
+     let data ={
+      images:req.file.path
+     }
   mongoClient.connect(connectionString, (err, clientObject) => {
     if (!err) {
       let dbo = clientObject.db("DavEms");
@@ -155,8 +169,9 @@ app.post('/department/activity',(req,res)=>{
       });
     }
   });
-  
-   res.send("data received successfully")
+   console.log(req.body, req.file)
+   
+   res.send("data received successfully") 
 })
 app.listen(9090);
 console.log("server started");
