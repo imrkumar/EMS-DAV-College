@@ -155,9 +155,26 @@ const upload = multer({ storage: storage })
 
 
 // add department activity
-app.post('/department/activity',upload.single('eventNotice'), (req,res)=>{
+app.post('/department/activity',upload.fields([
+  { name: 'eventNotice', maxCount: 1 },
+  { name: 'eventBanner', maxCount: 1 },
+  { name: 'attendance', maxCount: 1 },
+  { name: 'eventPic', maxCount: 1 },
+  { name: 'mediaCoverage', maxCount: 10 },
+]), (req,res)=>{
      let data ={
-      images:req.file.path
+        eventDate: req.body.eventDate,
+         eventNotice:req.files['eventNotice'][0].path,
+        eventBanner:req.files['eventBanner'][0].path,
+        eventName:req.body.eventName,
+        resourcePerson:req.body.resourcePerson,
+        briefIntro: req.body.briefIntro,
+        
+        eventReport:req.body.eventReport,
+        attendance:req.files['attendance'][0].path,
+        eventPic:req.files['eventPic'][0].path,
+        mediaCoverage:req.files['mediaCoverage'][0].path
+       
      }
   mongoClient.connect(connectionString, (err, clientObject) => {
     if (!err) {
