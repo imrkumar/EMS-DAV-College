@@ -1,53 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="/node_modules/bootstrap-icons/font/bootstrap-icons.css"/>
-    <link rel="icon" href="images/logo.png">
-    <scrip src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/node_modules/bootstrap-icons/font/bootstrap-icons.css" />
+  <link rel="icon" href="images/logo.png">
+  <scrip src="/node_modules/bootstrap/dist/js/bootstrap.min.js">
+    </script>
     <style>
-         #container {
-          display: flex;
-          width: 450px;
-          height: 100vh;
-          justify-content: center;
-          flex-direction: column;
-          align-items: center;
-          
-       }
-      form{
-          border: 1px solid;
-          padding: 20px; 
+      #container {
+        display: flex;
+        width: 450px;
+        height: 100vh;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
 
       }
-      #column{
+
+      form {
+        border: 1px solid;
+        padding: 20px;
+
+      }
+
+      #column {
         flex-direction: column;
       }
+
       .btnCross {
-    margin-left: 227px;
-    margin-top: -15px;
-    border: none;
-}
+        margin-left: 227px;
+        margin-top: -15px;
+        border: none;
+      }
     </style>
 </head>
 
 <body onload="loadDepartment()">
-     <div class="container-fluid" id="container">
+  <div class="container-fluid" id="container">
     <form class="border border-dark p-lg-5 rounded-3" id="Data">
-      <a href="adminDashboard.html" > <i class="bi bi-x-lg btnCross"></i></a>
+      <a href="adminDashboard.html"> <i class="bi bi-x-lg btnCross"></i></a>
       <h2 class="mb-4" style="overflow-y: hidden;">Add Dept-admin </h2>
       <dl>
         <dt><label class="form-label">Select Department</label></dt>
         <dd>
           <select class="form-select" id="dept" required>
             <option>Select Department</option>
-            
+
           </select>
         </dd>
-        <dt><label class="form-label" for="username" >Username</label></dt>
+        <dt><label class="form-label" for="username">Username</label></dt>
         <dd><input type="text" class="form-control" id="username" name="username" required></dd>
         <dt><label class="form-label" for="password">Password</label></dt>
         <dd><input type="password" class="form-control" id="password" name="password" required></dd>
@@ -57,64 +62,66 @@
       <div class="text-center mt-4"><button id="submit" class="btn btn bg-success  text-white ">Create</button>
         <button class="btn btn-danger ">Clear</button>
       </div>
-    </form>          
-  </div> 
+    </form>
+  </div>
   <script>
-    function loadDepartment(){
-      fetch("http://localhost:9090/department",{
-        method:"GET",
+    function loadDepartment() {
+      fetch("http://localhost:9090/department", {
+        method: "GET",
 
-      }).then((response)=>{
-        
-         return response.json()
-      }).then((data)=>{
-       
-        for(item of data){
-         var option= document.createElement("option")
-         option.id="department"
-         option.value=item.department
-         
-         option.text=item.department
-         
-         document.getElementById("dept").append(option)
+      }).then((response) => {
+
+        return response.json()
+      }).then((data) => {
+
+        for (item of data) {
+          var option = document.createElement("option")
+          option.id = "department"
+          option.value = item.department
+
+          option.text = item.department
+
+          document.getElementById("dept").append(option)
         }
-    })}
+      })
+    }
     const form = document.getElementById('Data');
-        form.addEventListener('submit', function(e) {
-           
-            e.preventDefault();
-           
-            let department = document.getElementById('dept').value;
-            let username= document.getElementById('username').value;
-            let password= document.getElementById('password').value;
-            let email= document.getElementById('email').value;
-            let data ={
-              "department":department,
-              "username":username,
-              "password":password,
-              "email":email
-            }
-            // const formData = new FormData(form);
-            
-            const payload = new URLSearchParams(data);
-           
-            fetch('http://localhost:9090/deptAdmin', {
-            method: 'POST',
-            body: payload,
-            })
-            .then((res)=>{
-               
-               
-                return res.json(data)
-            })
-            .then((data)=>{
-              console.log(data)
-             
-            })
-            .catch((error)=>{
-              console.log(error)
-            })
+    form.addEventListener('submit', function (e) {
+
+      e.preventDefault();
+
+      let department = document.getElementById('dept').value;
+      let username = document.getElementById('username').value;
+      let password = document.getElementById('password').value;
+      let email = document.getElementById('email').value;
+      let data = {
+        "department": department,
+        "username": username,
+        "password": password,
+        "email": email
+      }
+      // const formData = new FormData(form);
+
+      const payload = new URLSearchParams(data);
+
+      fetch('http://localhost:9090/deptAdmin', {
+        method: 'POST',
+        body: payload,
+      })
+        .then((res) => {
+
+
+          return res.json(data)
         })
+        .then((data) => {
+          console.log(data)
+
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    })
   </script>
 </body>
+
 </html>
