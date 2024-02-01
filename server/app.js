@@ -193,3 +193,22 @@ app.post('/department/activity',upload.fields([
 app.listen(9090);
 console.log("server started");
 
+/**
+ * consume api data
+ */
+
+app.get("/getdata", (req, res) => {
+  mongoClient.connect(connectionString, (err, clientObject) => {
+    if (!err) {
+      let dbo = clientObject.db("DavEms");
+      dbo
+        .collection("DeptActivity")
+        .find({})
+        .toArray((err, documents) => {
+          if (!err) {
+            res.send(documents);
+          }
+        });
+    }
+  });
+});
