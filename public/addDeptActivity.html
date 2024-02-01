@@ -1,111 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
 
-    </title>
-    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="/node_modules/bootstrap-icons/font/bootstrap-icons.css"/>
-    <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-    <link rel="icon" href="images/logo.png">
-    <style>
-          #container {
-                width: 890px;
-                height: 100vh;
-                margin-top: 10px;
-             }
-            form{
-                border: 1px solid;
-                padding: 20px;    
-            }
-           
-    </style>
+  </title>
+  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/node_modules/bootstrap-icons/font/bootstrap-icons.css" />
+  <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <link rel="icon" href="images/logo.png">
+  <style>
+    #container {
+      width: 890px;
+      height: 100vh;
+      margin-top: 10px;
+    }
+
+    form {
+      border: 1px solid;
+      padding: 20px;
+    }
+  </style>
 </head>
-<body>
-   
-    <div class="container-fluid" id="container">
-        <form class="border border-dark p-lg-5 rounded-3" id="Data"enctype="multipart/form-data"  >
-            <h2 class="mb-4" style="text-align: center;">ADD DEPARTMENT ACTIVITY</h2>
-            <dl>
-                <dt><label class="form-label" for="eventDate">EVENT DATE</label></dt>
-                <dd><input type="date" class="form-control" id="eventDate" name="eventDate"></dd>
-                <dt><label class="form-label" for="eventNotice">EVENT NOTICE</label></dt>
-                <dd><input type="file" class="form-control" id="eventNotice" name="eventNotice"></dd>
-                <dt><label class="form-label" for="eventBanner">EVENT BANNER</label></dt>
-                <dd><input type="file" class="form-control" id="eventBanner" name="eventBanner" ></dd>
-                <dt><label class="form-label" for="eventName">EVENT NAME</label></dt>
-                <dd><input type="text" class="form-control" id="eventName" name="eventName" ></dd>
-                <dt><label class="form-label" for="resourcePerson">NAME OF THE RESOURCE PERSON</label></dt>
-                <dd><input type="text" class="form-control" id="resourcePerson" name="resourcePerson"> </dd>
-                <dt><label class="form-label" for="briefIntro">BRIEF INTRODUCTION ABOUT RESOURCE PERSON</label></dt>
-                <dd><textarea class="form-control" id="briefIntro" name="briefIntro" ></textarea></dd>
-                <dt><label class="form-label" for="eventReport">EVENT REPORT</label></dt>
-                <dd><textarea class="form-control " id="eventReport" name="eventReport" ></textarea></dd>
-                <dt><label class="form-label" for="attendance" >ATTENDANCE PROOF</label></dt>
-                <dd><input type="file" class="form-control" id="attendance" name="attendance" ></dd>
-                <dt><label class="form-label" for="eventPic">EVENT PICTURE</label></dt>
-                <dd><input type="file" class="form-control" id="eventPic" name="eventPic" ></dd>
-                <dt><label class="form-label" for="mediaCoverage">MEDIA COVERAGE</label></dt>
-                <dd><input type="file" class="form-control" id="mediaCoverage" name="mediaCoverage" ></dd>
-               
-            </dl>
-            <div class="text-center mt-4">
-                <button id="submit"  class="btn btn bg-success  text-white ">SUBMIT</button></div>
-        </form>
-        
-       </div> 
-       <script>
-         const form = document.getElementById('Data');
-        form.addEventListener('submit', function(e) {
-           
-            e.preventDefault();
-           
-            let eventDate = document.getElementById('eventDate').value;
-            let eventNotice= document.getElementById('eventNotice').value;
-            let eventBanner= document.getElementById('eventBanner').value;
-            let eventName= document.getElementById('eventName').value;
-            let resourcePerson= document.getElementById('resourcePerson').value;
-            let briefIntro= document.getElementById('briefIntro').value;
-            let eventReport= document.getElementById('eventReport').value;
-            let attendance= document.getElementById('attendance').value;
-            let eventPic= document.getElementById('eventPic').value;
-            let mediaCoverage= document.getElementById('mediaCoverage').value;
-            let data ={
-              "eventDate": eventDate,
-              "eventNotice":eventNotice,
-              "eventBanner":eventBanner,
-              "eventName":eventName,
-              "resourcePerson":resourcePerson,
-              "briefIntro":briefIntro,
-              "eventReport":eventReport,
-              "attendance":attendance,
-              "eventPic":eventPic,
-              "mediaCoverage":mediaCoverage
 
-            }
-           
-            
-            const payload = new URLSearchParams(data);
-           
-            fetch('http://localhost:9090/department/activity', {
-            method: 'POST',
-            body: payload,
-            })
-            .then((res)=>{
-               
-               
-                return res.json(data)
-            })
-            .then((data)=>{
-              console.log(data)
-             
-            })
-            .catch((error)=>{
-              console.log(error)
-            })
-        })
-       </script>
+<body>
+
+  <div class="container-fluid" id="container">
+    <form class="border border-dark p-lg-5 rounded-3" id="Data" enctype="multipart/form-data">
+      <h2 class="mb-4" style="text-align: center;">ADD DEPARTMENT ACTIVITY</h2>
+      <dl>
+        <dt><label class="form-label" for="eventDate">EVENT DATE</label></dt>
+        <dd><input type="date" class="form-control" id="eventDate" name="eventDate" required></dd>
+        <dt><label class="form-label" for="eventNotice">EVENT NOTICE</label></dt>
+        <dd><input type="file" class="form-control" id="eventNotice" name="eventNotice" required></dd>
+        <dt><label class="form-label" for="eventBanner">EVENT BANNER</label></dt>
+        <dd><input type="file" class="form-control" id="eventBanner" name="eventBanner" required></dd>
+        <dt><label class="form-label" for="eventName">EVENT NAME</label></dt>
+        <dd><input type="text" class="form-control" id="eventName" name="eventName" required></dd>
+        <dt><label class="form-label" for="resourcePerson">NAME OF THE RESOURCE PERSON</label></dt>
+        <dd><input type="text" class="form-control" id="resourcePerson" name="resourcePerson" required> </dd>
+        <dt><label class="form-label" for="briefIntro">BRIEF INTRODUCTION ABOUT RESOURCE PERSON</label></dt>
+        <dd><textarea class="form-control" id="briefIntro" name="briefIntro" required></textarea></dd>
+        <dt><label class="form-label" for="eventReport">EVENT REPORT</label></dt>
+        <dd><textarea class="form-control " id="eventReport" name="eventReport" required></textarea></dd>
+        <dt><label class="form-label" for="attendance">ATTENDANCE PROOF</label></dt>
+        <dd><input type="file" class="form-control" id="attendance" name="attendance" required></dd>
+        <dt><label class="form-label" for="eventPic">EVENT PICTURE</label></dt>
+        <dd id="inputpicContainer"><input type="file" class="form-control" id="eventPic" name="eventPic" required></dd>
+        <dd><button id="addInputpicButton" class="btn btn-success">Add More</button></dd>
+        <dt><label class="form-label" for="mediaCoverage">MEDIA COVERAGE</label></dt>
+        <dd id="inputContainer" ><input type="file" class="form-control" id="mediaCoverage" name="mediaCoverage" required></dd>
+        <dd><button id="addInputButton" class="btn btn-success">Add More</button></dd>
+
+      </dl>
+      <div class="text-center mt-4">
+        <button id="submit" class="btn btn bg-success  text-white ">SUBMIT</button>
+      </div>
+    </form>
+
+  </div>
+  <script>
+    const form = document.getElementById('Data');
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      try {
+        // Create a FormData object from the form
+        const formData = new FormData(form);
+       
+
+        // Make a POST request to the server with the FormData
+        const response = await fetch('http://localhost:9090/department/activity', {
+          method: 'POST',
+          body: formData,
+        });
+
+        // Check if the request was successful (status code 2xx)
+        if (response.ok) {
+          // Parse the JSON response
+          const data = await response.json();
+          console.log(data);
+        } else {
+          // Handle the error
+          console.error('Server error:', response.statusText);
+        }
+      } catch (error) {
+        // Handle network errors or other exceptions
+        console.error('Error:', error.message);
+      }
+    });
+    
+    document.getElementById('addInputButton').addEventListener('click', function(e) {
+      e.preventDefault();
+            // Create a new input element
+            const newInput = document.createElement('input');
+
+            // Set attributes for the new input (e.g., type, placeholder, name, etc.)
+            newInput.type = 'file';
+            newInput.name = 'mediaCoverage';
+            newInput.className="form-control";
+            newInput.id="mediaCoverage";
+
+            // Append the new input to the container
+            document.getElementById('inputContainer').appendChild(newInput);
+        });
+    document.getElementById('addInputpicButton').addEventListener('click', function(e) {
+      e.preventDefault();
+            // Create a new input element
+            const newInput = document.createElement('input');
+
+            // Set attributes for the new input (e.g., type, placeholder, name, etc.)
+            newInput.type = 'file';
+            newInput.name = 'eventPic';
+            newInput.className="form-control";
+            newInput.id="eventPic";
+
+            // Append the new input to the container
+            document.getElementById('inputpicContainer').appendChild(newInput);
+        });
+  </script>
 </body>
+
 </html>

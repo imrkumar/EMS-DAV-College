@@ -159,7 +159,7 @@ app.post('/department/activity',upload.fields([
   { name: 'eventNotice', maxCount: 1 },
   { name: 'eventBanner', maxCount: 1 },
   { name: 'attendance', maxCount: 1 },
-  { name: 'eventPic', maxCount: 1 },
+  { name: 'eventPic', maxCount: 10 },
   { name: 'mediaCoverage', maxCount: 10 },
 ]), (req,res)=>{
      let data ={
@@ -170,10 +170,10 @@ app.post('/department/activity',upload.fields([
         resourcePerson:req.body.resourcePerson,
         briefIntro: req.body.briefIntro,
         
-        eventReport:req.body.eventReport,
+        eventReport:req.body.eventReport, 
         attendance:req.files['attendance'][0].path,
-        eventPic:req.files['eventPic'][0].path,
-        mediaCoverage:req.files['mediaCoverage'][0].path
+        eventPic:req.files['eventPic'].map(file=>file.path),
+        mediaCoverage:req.files['mediaCoverage'].map(file=>file.path)
        
      }
   mongoClient.connect(connectionString, (err, clientObject) => {
@@ -182,8 +182,8 @@ app.post('/department/activity',upload.fields([
       dbo.collection("DeptActivity").insertOne(data, (err, result) => {
         if (!err) {
           console.log("record inserted");
-        }
-      });
+        } 
+      });  
     }
   });
    console.log(req.body, req.file)
@@ -194,7 +194,7 @@ app.listen(9090);
 console.log("server started");
 
 /**
- * consume api data
+ * consume api data 
  */
 
 app.get("/getdata", (req, res) => {
