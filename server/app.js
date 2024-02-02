@@ -197,7 +197,7 @@ console.log("server started");
  * consume api data 
  */
 
-app.get("/getdata", (req, res) => {
+app.get("/getEventData", (req, res) => {
   mongoClient.connect(connectionString, (err, clientObject) => {
     if (!err) {
       let dbo = clientObject.db("DavEms");
