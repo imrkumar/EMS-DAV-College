@@ -73,9 +73,9 @@
         </button>
     </div>
     <h2 class="mb-4" id="ue-heading">UPCOMING EVENT</h2>
-    <div class="main">
+    <div class="main" id="upcomingEvent">
 
-        <div class="card  h-50">
+        <!-- <div class="card  h-50">
             <div class="card-header ">
                 <img src="https://static.vecteezy.com/system/resources/previews/007/303/756/original/live-cricket-tournament-match-background-free-vector.jpg"
                     width="100%">
@@ -146,8 +146,9 @@
                 </p>
             </div>
 
-        </div>
-    </div><br><br>
+        </div> -->
+    </div><br>
+    <div class="btn btn-success">View All</div>
     <h2 class="mb-4" id="ue-heading">PRESENT EVENT</h2>
     <div class="main">
 
@@ -187,6 +188,7 @@
             </div>
 
         </div>
+
         <div class="card  h-50">
             <div class="card-header ">
                 <img src="https://cdn2.vectorstock.com/i/1000x1000/48/96/football-game-event-tournament-invitation-design-vector-14514896.jpg"
@@ -383,6 +385,46 @@
         </footer>
     </div>
 
+    <script>
+
+        const datacon = document.getElementById('upcomingEvent');
+        fetch("http://localhost:9090/getEventData", {
+            method: "get",
+
+        }).then((res) => {
+            return res.json()
+        }).then((data) => {
+            console.log(data)
+            for (let item = 0; item < 4; item++) {
+                let div = document.createElement('div')
+
+                div.innerHTML = `
+            
+        <div class="card  " >
+            <div class="card-header ">
+                <img src="${data[item].eventBanner}"
+                    width="100%" height="250px">
+            </div>
+            <div class="card-body">
+                <p class="card-text">
+                    <span class="fw-bold">Event Name :</span> ${data[item].eventName}
+                </p>
+                <p class="card-text">
+                    <span class="fw-bold">Event Incharge :</span> ${data[item].resourcePerson}
+                </p>
+                <p class="card-text">
+                    <span class="fw-bold">Event Date :</span> ${data[item].eventDate}
+                </p>
+                
+            </div>
+
+        </div>
+
+           `
+                datacon.append(div)
+            }
+        })
+    </script>
 </body>
 
 </html>

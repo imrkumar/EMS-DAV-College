@@ -208,7 +208,7 @@ app.get("/getEventData", (req, res) => {
           if (!err) {
             res.send(documents);
           }
-        });
+        }); 
     }
   });
 });
