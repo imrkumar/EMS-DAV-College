@@ -187,7 +187,7 @@ app.post('/department/activity',upload.fields([
     }
   });
    console.log(req.body, req.file)
-   
+    
    res.send("data received successfully") 
 })
 app.listen(9090);
