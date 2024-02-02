@@ -21,7 +21,11 @@
             padding: 20px;
 
         }
+        #cancel a{
+  text-decoration: none;
+  color: white;
 
+}
     </style>
 </head>
 <body onload="loadDepartment()">
@@ -40,7 +44,7 @@
             <dd><input type="password" id="password" class="form-control" name="password"  required></dd>
         </dl>
         <div class="text-center mt-4"><button class="btn btn bg-success  text-white ">Submit</button>
-            <button class="btn btn-danger ">Cancel</button></div>
+            <button class="btn btn-danger " id="cancel"><a href="index.html">Cancel</a> </button></div>
         <div class="text-center mt-4">
             <span class="me-3"><a href="">Change Password</a></span>
             <span><a href="">Forget Password</a></span>
