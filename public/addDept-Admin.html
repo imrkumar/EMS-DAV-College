@@ -51,7 +51,10 @@
             <option>Select Department</option>
             
           </select>
+          <div id="errorMsg">
+          </div>
         </dd>
+
         <dt><label class="form-label" for="username" >Username</label></dt>
         <dd><input type="text" class="form-control" id="username" name="username" required></dd>
         <dt><label class="form-label" for="password">Password</label></dt>
@@ -92,15 +95,6 @@
            
             e.preventDefault();
 
-              // const deptdropdown=document.getElementById('dept');
-              // const selecteddepartment=deptdropdown.value;
-
-              // if(selecteddepartment===deptdropdown){
-
-              //   alert("same department");
-                
-              // }
-
             let department = document.getElementById('dept').value;
             let username= document.getElementById('username').value;
             let password= document.getElementById('password').value;
@@ -121,11 +115,43 @@
             .then((res)=>{
                
               return res.json(data)
-            }) 
-            
-        })
+              
 
-      
+            }) 
+            location.href="adminDashboard.html";
+        })
+       
+        document.addEventListener('DOMContentLoaded', function () {
+
+    let departmentSelect = document.getElementById('dept');
+    let errorMsg = document.getElementById('errorMsg');
+
+    departmentSelect.addEventListener('change', (e) => {
+        let selectedDepartment = e.target.value;
+
+        // Use the fetch API to check if the department already exists
+        fetch('http://localhost:9090/admindashboard')
+            .then(res => res.json())
+            .then((data) => {
+                let departmentExists = data.some(item => item.department === selectedDepartment);
+
+                if (departmentExists) {
+                    errorMsg.className = "text-danger";
+                    errorMsg.innerHTML = "Department already exists";
+                    document.getElementById('submit').disabled=true;
+                } else {
+                  document.getElementById('submit').disabled=false;
+                    errorMsg.innerHTML = "";
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching department data:', error);
+            });
+    });
+
+
+});
+   
   </script>
 </body>
 </html>
