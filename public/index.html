@@ -71,8 +71,14 @@
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
         </button>
-    </div>
-    <h2 class="mb-4" id="ue-heading">UPCOMING EVENT</h2>
+    </div><BR><br><br>
+    <h2 class="mb-4" id="ue-heading">EVENT GALLERY</h2>
+    <div class="buttons">
+        <button class="btn btn-danger">All Event</button>
+        <button class="btn btn-danger">Upcoming  Event</button>
+        <button class="btn btn-danger">Present Event</button>
+        <button class="btn btn-danger">Past Event</button>
+    </div><br>
     <div class="main" id="upcomingEvent">
 
         <!-- <div class="card  h-50">
@@ -148,8 +154,7 @@
 
         </div> -->
     </div><br>
-    <div class="btn btn-success">View All</div>
-    <h2 class="mb-4" id="ue-heading">PRESENT EVENT</h2>
+    <!-- <h2 class="mb-4" id="ue-heading">PRESENT EVENT</h2>
     <div class="main">
 
         <div class="card  h-50">
@@ -301,7 +306,7 @@
             </div>
 
         </div>
-    </div><br><br>
+    </div><br><br> -->
 
     <div class="container" style="border-top: 2px solid whitesmoke;">
         <footer class="py-5">
@@ -389,46 +394,49 @@
         </footer>
     </div>
 
+   
     <script>
-
         const datacon = document.getElementById('upcomingEvent');
         fetch("http://localhost:9090/getEventData", {
             method: "get",
-
         }).then((res) => {
             return res.json()
         }).then((data) => {
-            console.log(data)
-            for (let item = 0; item < 4; item++) {
-                let div = document.createElement('div')
-
-                div.innerHTML = `
+         
+            const currentDate = new Date();
+    
+         
+            const futureEvents = data.filter(event => new Date(event.eventDate) > currentDate);
+    
             
-        <div class="card  " >
-            <div class="card-header ">
-                <img src="${data[item].eventBanner}"
-                    width="100%" height="250px">
-            </div>
-            <div class="card-body">
-                <p class="card-text">
-                    <span class="fw-bold">Event Name :</span> ${data[item].eventName}
-                </p>
-                <p class="card-text">
-                    <span class="fw-bold">Event Incharge :</span> ${data[item].resourcePerson}
-                </p>
-                <p class="card-text">
-                    <span class="fw-bold">Event Date :</span> ${data[item].eventDate}
-                </p>
-                
-            </div>
-
-        </div>
-
-           `
-                datacon.append(div)
+            futureEvents.sort((a, b) => new Date(b.eventDate) - currentDate - (new Date(a.eventDate) - currentDate));
+    
+            for (let item = 0; item < futureEvents.length; item++) {
+                let div = document.createElement('div')
+    
+                div.innerHTML = `
+                    <div class="card">
+                        <div class="card-header">
+                            <img src="${futureEvents[item].eventBanner}" width="100%" height="250px">
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">
+                                <span class="fw-bold">Event Name :</span> ${futureEvents[item].eventName}
+                            </p>
+                            <p class="card-text">
+                                <span class="fw-bold">Event Incharge :</span> ${futureEvents[item].resourcePerson}
+                            </p>
+                            <p class="card-text">
+                                <span class="fw-bold">Event Date :</span> ${futureEvents[item].eventDate}
+                            </p>
+                        </div>
+                    </div>
+               `;
+                datacon.append(div);
             }
         })
     </script>
+    
 </body>
 
 </html>

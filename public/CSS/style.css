@@ -29,7 +29,7 @@
   justify-content: center;
 }
 .card{
-  width: 292px;
+  width: 350px;
   margin: 5px;
 }
 .card-body{
@@ -76,4 +76,13 @@
   text-align: center;
   overflow-y: hidden;
   margin-top: 10px;
+  font-style: italic;
+}
+#ue-heading:hover{
+ cursor: pointer;
+  color: #da1212;
+  
+}
+.buttons{
+  text-align: center;
 }
