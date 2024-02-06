@@ -126,6 +126,7 @@ app.post("/department/login", (req, res) => {
               username == documents[0].username &&
               password == documents[0].password
             ) {
+              res.redirect('/public/index.html');
               console.log("login success");
             } else {
               res.status(401);
@@ -204,9 +205,9 @@ app.get("/getEventData", (req, res) => {
         .find({})
         .toArray((err, documents) => {
           if (!err) {
-            res.send(documents);
+            res.send(documents); 
           }
-        });
+        });   
     }
   });
 });
