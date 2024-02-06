@@ -1,25 +1,23 @@
 let express = require("express");
 let cors = require("cors");
 let app = express();
-let fs = require('fs');
-let multer = require('multer');
+let multer = require("multer");
 let mongoClient = require("mongodb").MongoClient;
 let bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
 let connectionString = "mongodb://127.0.0.1:27017";
-let mongoose = require("mongoose");
-let path = require('path');
-const { data } = require("jquery");
+let path = require("path");
+const { ObjectId } = require("mongodb");
 app.use(bodyParser.json());
 app.use(cors());
 
-app.get('/',(req,res)=>{
+app.get("/", (req, res) => {
   res.send({
-    "about":"This is Event management of DAV College."
-  })
-})
+    about: "This is Event management of DAV College.",
+  });
+});
 
-//admin-login 
+//admin-login
 
 app.post("/admin-login", (req, res) => {
   let username = req.body.username;
@@ -128,7 +126,6 @@ app.post("/department/login", (req, res) => {
               username == documents[0].username &&
               password == documents[0].password
             ) {
-              res.redirect('/public/index.html');
               console.log("login success");
             } else {
               res.status(401);
@@ -143,58 +140,59 @@ app.post("/department/login", (req, res) => {
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, '../public/backend/images')
+    cb(null, "../public/backend/images");
   },
   filename: function (req, file, cb) {
-    cb(null, `${Date.now()}-${file.originalname}`)
-  }
-})
+    cb(null, `${Date.now()}-${file.originalname}`);
+  },
+});
 
-const upload = multer({ storage: storage })
-// const upload = multer({ dest: '../public/backend/images' }) 
-
+const upload = multer({ storage: storage });
 
 // add department activity
-app.post('/department/activity',upload.fields([
-  { name: 'eventNotice', maxCount: 1 },
-  { name: 'eventBanner', maxCount: 1 },
-  { name: 'attendance', maxCount: 1 },
-  { name: 'eventPic', maxCount: 10 },
-  { name: 'mediaCoverage', maxCount: 10 },
-]), (req,res)=>{
-     let data ={
-        eventDate: req.body.eventDate,
-         eventNotice:req.files['eventNotice'][0].path,
-        eventBanner:req.files['eventBanner'][0].path,
-        eventName:req.body.eventName,
-        resourcePerson:req.body.resourcePerson,
-        briefIntro: req.body.briefIntro,
-        
-        eventReport:req.body.eventReport, 
-        attendance:req.files['attendance'][0].path,
-        eventPic:req.files['eventPic'].map(file=>file.path),
-        mediaCoverage:req.files['mediaCoverage'].map(file=>file.path)
-       
-     }
-  mongoClient.connect(connectionString, (err, clientObject) => {
-    if (!err) {
-      let dbo = clientObject.db("DavEms");
-      dbo.collection("DeptActivity").insertOne(data, (err, result) => {
-        if (!err) {
-          console.log("record inserted");
-        } 
-      });  
-    }
-  });
-   console.log(req.body, req.file)
-    
-   res.send("data received successfully") 
-})
+app.post(
+  "/department/activity",
+  upload.fields([
+    { name: "eventNotice", maxCount: 1 },
+    { name: "eventBanner", maxCount: 1 },
+    { name: "attendance", maxCount: 1 },
+    { name: "eventPic", maxCount: 10 },
+    { name: "mediaCoverage", maxCount: 10 },
+  ]),
+  (req, res) => {
+    let data = {
+      eventDate: req.body.eventDate,
+      eventNotice: req.files["eventNotice"][0].path,
+      eventBanner: req.files["eventBanner"][0].path,
+      eventName: req.body.eventName,
+      resourcePerson: req.body.resourcePerson,
+      briefIntro: req.body.briefIntro,
+
+      eventReport: req.body.eventReport,
+      attendance: req.files["attendance"][0].path,
+      eventPic: req.files["eventPic"].map((file) => file.path),
+      mediaCoverage: req.files["mediaCoverage"].map((file) => file.path),
+    };
+    mongoClient.connect(connectionString, (err, clientObject) => {
+      if (!err) {
+        let dbo = clientObject.db("DavEms");
+        dbo.collection("DeptActivity").insertOne(data, (err, result) => {
+          if (!err) {
+            console.log("record inserted");
+          }
+        });
+      }
+    });
+    console.log(req.body, req.file);
+
+    res.send("data received successfully");
+  }
+);
 app.listen(9090);
 console.log("server started");
 
 /**
- * consume api data 
+ * consume api data
  */
 
 app.get("/getEventData", (req, res) => {
@@ -209,6 +207,47 @@ app.get("/getEventData", (req, res) => {
             res.send(documents);
           }
         });
+    }
+  });
+});
+
+/**
+ * @name: Update admin dashboard
+ * @api: /deptAdmin/update
+ */
+
+// app.update('/deptAdmin/update',(req,res)=>{
+//   let department = req.body.department;
+//   let username = req.body.username;
+//   let password = req.body.password;
+//   let email = req.body.email;
+//   let data = {
+//     department: department,
+//     username: username,
+//     password: password,
+//     email: email,
+//   };
+
+// })
+
+/**
+ * @name: Update admin dashboard
+ * @api: /deptAdmin/delete
+ */
+
+app.get("/deptAdmin/delete/:id", (req, res) => {
+  let id = req.params.id;
+  mongoClient.connect(connectionString, (err, clientObject) => {
+    if (!err) {
+      let dbo = clientObject.db("DavEms");
+      dbo
+        .collection("DeptAdmin")
+        .deleteOne({ _id: ObjectId(id) }, (err, result) => {
+          if (!err) {
+            console.log("record deleted");
+          }
+        });
+      
     }
   });
 });
