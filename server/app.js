@@ -126,8 +126,7 @@ app.post("/department/login", (req, res) => {
               username == documents[0].username &&
               password == documents[0].password
             ) {
-             
-              console.log("login success");
+                console.log("login success");
             } else {
               res.status(401);
               console.log("login denied");
