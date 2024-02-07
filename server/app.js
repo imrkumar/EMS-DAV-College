@@ -125,19 +125,14 @@ app.post("/department/login", (req, res) => {
               department == documents[0].department &&
               username == documents[0].username &&
               password == documents[0].password
-<<<<<<< HEAD
-            ) { 
-              
-=======
             ) {
               res.redirect('/public/index.html');
->>>>>>> 2801a1b7c33bacdeab08510c9065676e47811b17
               console.log("login success");
             } else {
               res.status(401);
               console.log("login denied");
             }
-          }
+          } 
         });
     }
   });
