@@ -127,7 +127,7 @@ app.post("/department/login", (req, res) => {
               department == documents[0].department &&
               username == documents[0].username &&
               password == documents[0].password
-            ) {
+            ) { 
               
               console.log("login success");
             } else {

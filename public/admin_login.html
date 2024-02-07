@@ -1,70 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Admin Login</title>
-        <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
-        <link rel="icon" href="images/logo.png">
-        <style>
-            
-            #container {
-                display: flex;
-                width: 450px;
-                height: 100vh;
-                justify-content: center;
-                flex-direction: column;
-                align-items: center;
-             }
-            form{
-                border: 1px solid;
-                padding: 20px;
-    
-            }
-    
-      
-        </style>
-    </head>
-    <body>
-        <div class="container-fluid" id="container">
-            <form class="border border-dark p-lg-5 rounded-3" id="Data" >
-                <h2 class="mb-4">Admin Login</h2>
-                <dl>
-                    <dt><label class="form-label" for="Username">Username</label></dt>
-                    <dd><input type="text" class="form-control" id="username" name="username"></dd>
-                    <dt><label class="form-label" for="password">Password</label></dt>
-                    <dd><input type="password" class="form-control" name="password" id="password"></dd>
-                </dl>
-                <div class="text-center mt-4">
-                    <button id="submit"  class="btn btn bg-success  text-white ">LOGIN</button></div>
-            </form>
-            
-           </div> 
-          
-            
-           <script>
-            const form = document.getElementById('Data');
-        form.addEventListener('submit', function(e) {
-           
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="icon" href="images/logo.png">
+    <style>
+        #container {
+            display: flex;
+            width: 450px;
+            height: 100vh;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        form {
+            border: 1px solid;
+            padding: 20px;
+
+        }
+
+        #cancel a {
+            text-decoration: none;
+            color: white;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid" id="container">
+        <form class="border border-dark p-lg-5 rounded-3" id="Data">
+            <h2 class="mb-4">Admin Login</h2>
+            <dl>
+                <dt><label class="form-label" for="Username">Username</label></dt>
+                <dd><input type="text" class="form-control" id="username" name="username"></dd>
+                <dt><label class="form-label" for="password">Password</label></dt>
+                <dd><input type="password" class="form-control" name="password" id="password"></dd>
+            </dl>
+            <div class="text-center mt-4">
+                <button id="submit" class="btn btn bg-success  text-white ">LOGIN</button>
+                <button class="btn btn-danger " id="cancel"><a href="index.html">Cancel</a> </button>
+            </div>
+        </form>
+
+    </div>
+
+
+    <script>
+        const form = document.getElementById('Data');
+        form.addEventListener('submit', function (e) {
+
             e.preventDefault();
-           
+
             const formData = new FormData(form);
-            
+
             const payload = new URLSearchParams(formData);
-           
+
             fetch('http://localhost:9090/admin-login', {
-            method: 'POST',
-            body: payload,
+                method: 'POST',
+                body: payload,
             })
-            .then((res)=>{
-                if(res.status==200){
-                    location.href="../public/adminDashboard.html"
-                }
-               
-            })
-            
-            
+                .then((res) => {
+                    if (res.status == 200) {
+                        location.href = "../public/adminDashboard.html"
+                    }
+
+                })
+
+
         })
-                   </script>
-    </body>
+    </script>
+</body>
+
 </html>
