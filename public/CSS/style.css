@@ -30,7 +30,7 @@
 }
 .card{
   width: 350px;
-  margin: 5px;
+  margin: 22px;
 }
 .card-body{
   height: 150px;
@@ -85,4 +85,16 @@
 }
 .buttons{
   text-align: center;
+}
+#upcomingEvent{
+  display: none;
+}
+#presentEvent{
+  display: none;
+}
+#pastEvent{
+  display: none;
+}
+.main{
+  margin-bottom: 30px;
 }
