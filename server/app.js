@@ -157,7 +157,7 @@ app.post(
     { name: "eventBanner", maxCount: 1 },
     { name: "attendance", maxCount: 1 },
     { name: "eventPic", maxCount: 10 },
-    { name: "mediaCoverage", maxCount: 10 },
+    { name: "mediaCoverage", maxCount: 10 }, 
   ]),
   (req, res) => {
     let data = {
@@ -216,25 +216,59 @@ app.get("/getEventData", (req, res) => {
  * @api: /deptAdmin/update
  */
 
-// app.update('/deptAdmin/update',(req,res)=>{
-//   let department = req.body.department;
-//   let username = req.body.username;
-//   let password = req.body.password;
-//   let email = req.body.email;
-//   let data = {
-//     department: department,
-//     username: username,
-//     password: password,
-//     email: email,
-//   };
+app.get('/deptAdmin/update/:id',(req,res)=>{
+  let id = req.params.id;
+  mongoClient.connect(connectionString, (err, clientObject) => {
+    if (!err) {
+      let dbo = clientObject.db("DavEms");
+      dbo
+     .collection("DeptAdmin")
+     .find({ _id: ObjectId(id) })
+     .toArray((err, documents) => {
+          if (!err) { 
+            res.send(documents);  
+          }
+        });   
+    }
+  });
+})
+app.put('/deptAdmin/update/id',(req,res)=>{
+  let department = req.body.department;
+  let username = req.body.username;
+  let password = req.body.password;
+  let email = req.body.email;
+  let data = {
+    department: department,
+    username: username,
+    password: password,
+    email: email,
+  };
 
-// })
+  let id = req.params.id;
+  mongoClient.connect(connectionString, (err, clientObject) => {
+    if (!err) {
+      let dbo = clientObject.db("DavEms");
+      dbo
+        .collection("DeptAdmin")
+        .updateOne({ _id: ObjectId(id)  }, { $set: data }, (err, result) => {
+          if (!err) {
+            console.log("Record updated successfully");
+            res.status(204).send();
+          }
+        });
+      
+    }
+   
+  });
+
+})
 
 /**
- * @name: Update admin dashboard
+ * @name: delete department admin
  * @api: /deptAdmin/delete
  */
 
+ 
 app.get("/deptAdmin/delete/:id", (req, res) => {
   let id = req.params.id;
   mongoClient.connect(connectionString, (err, clientObject) => {
@@ -245,9 +279,11 @@ app.get("/deptAdmin/delete/:id", (req, res) => {
         .deleteOne({ _id: ObjectId(id) }, (err, result) => {
           if (!err) {
             console.log("record deleted");
+            res.status(204).send();
           }
         });
       
     }
+   
   });
 });

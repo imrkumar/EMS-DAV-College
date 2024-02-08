@@ -31,9 +31,9 @@
         <h2 class="mb-4">Department Login</h2>
         <dl>
             <dt><label class="form-label">Select Department</label></dt>
-            <dd><select class="form-select" id="dept" required>
-                <option>Select Department</option>
-            </select></dd>
+            <dd><input class="form-control" type="text" id="dept" required readonly>
+               
+            </input></dd>
             <dt><label class="form-label" for="username">Username</label></dt>
             <dd><input type="text" class="form-control" id="username" name="username" required></dd>
             <dt><label class="form-label" for="password">Password</label></dt>
@@ -41,16 +41,20 @@
         </dl>
         <div class="text-center mt-4"><button class="btn btn bg-success  text-white ">Submit</button>
             <button class="btn btn-danger ">Cancel</button></div>
-        <div class="text-center mt-4">
+        <!-- <div class="text-center mt-4">
             <span class="me-3"><a href="">Change Password</a></span>
             <span><a href="">Forget Password</a></span>
-        </div>
+        </div> -->
     </form>
     
    </div> 
    <script>
-    function loadDepartment(){
-      fetch("http://localhost:9090/department",{
+
+const url = new URL(window.location.href);
+    const documentId = url.searchParams.get('id');
+    function addData(){
+         
+      fetch(`http://localhost:9090/deptAdmin/update/${documentId}`,{
         method:"GET",
 
       }).then((response)=>{
@@ -58,16 +62,40 @@
          return response.json()
       }).then((data)=>{
        
-        for(item of data){
-         var option= document.createElement("option")
-         option.id="department"
-         option.value=item.department
-         
-         option.text=item.department
-         
-         document.getElementById("dept").append(option)
-        }
+            let department = document.getElementById('dept');
+            let username= document.getElementById('username');
+            let password= document.getElementById('password');
+
+            department.value = data[0].department;
+            username.value = data[0].username;
+            password.value = data[0].password;
+            
+        
     })}
+    addData();
+    
+    // function loadDepartment(){
+    //   fetch("http://localhost:9090/department",{
+    //     method:"GET",
+
+    //   }).then((response)=>{
+        
+    //      return response.json()
+    //   }).then((data)=>{
+       
+    //     for(item of data){
+    //      var option= document.createElement("option")
+    //      option.id="department"
+    //      option.value=item.department
+         
+    //      option.text=item.department
+         
+    //      document.getElementById("dept").append(option)
+    //     }
+    // })}
+    
+
+    console.log(documentId);
     const form = document.getElementById('data');
         form.addEventListener('submit', function(e) {
            
@@ -87,7 +115,7 @@
             
             const payload = new URLSearchParams(data);
            
-            fetch('http://localhost:9090/department/login', {
+            fetch(`http:/localhost:9090/deptAdmin/update/${documentId}`, {
             method: 'POST',
             body: payload,
             })
