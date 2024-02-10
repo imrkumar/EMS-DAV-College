@@ -324,7 +324,7 @@ app.get("/deptAdmin/update/:id", (req, res) => {
 });
 app.put("/deptAdmin/update/:id", (req, res) => {
   let id = req.params.id;
-  let username = req.body.username;
+  let username = req.body.username; 
   let password = req.body.password;
 
   let data = {
