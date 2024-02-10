@@ -4,7 +4,7 @@
   "description": "This is event management system",
   "main": "index.js",
   "scripts": {
-    "start": " npx nodemon app.js",
+    "start": " npx nodemon server/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Rahul Kumar and Abhishek Kumar",
@@ -14,6 +14,7 @@
     "bootstrap-icons": "^1.11.2",
     "cloudinary": "^1.41.2",
     "cors": "^2.8.5",
+    "dotenv": "^16.4.1",
     "express": "^4.18.2",
     "gridfs-stream": "^1.1.1",
     "jquery": "^3.7.1",

@@ -7,6 +7,8 @@ let bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
 let connectionString = "mongodb://127.0.0.1:27017";
 let path = require("path");
+require('dotenv').config();
+let port = process.env.PORT || 9080;
 const { ObjectId } = require("mongodb");
 app.use(bodyParser.json());
 app.use(cors());
@@ -188,8 +190,7 @@ app.post(
     res.send("data received successfully");
   }
 );
-app.listen(9090);
-console.log("server started");
+
 
 /**
  * consume api data
@@ -315,3 +316,24 @@ app.get("/deptAdmin/delete/:id", (req, res) => {
    
   });
 });
+
+
+
+
+
+
+
+
+
+/**
+ * @server : server is running on port(value)
+ * @url :http://localhost:port
+ */
+app.listen(port,(err)=>{
+  if(err){
+    console.log(err);
+  }else{
+    console.log("Server is running on port "+port);
+  }
+});
+
