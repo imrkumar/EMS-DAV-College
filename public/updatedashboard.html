@@ -101,12 +101,12 @@ const url = new URL(window.location.href);
            
             e.preventDefault();
            
-            let department = document.getElementById('dept').value;
+           
             let username= document.getElementById('username').value;
             let password= document.getElementById('password').value;
             
             let data ={
-              "department":department,
+              
               "username":username,
               "password":password,
              
@@ -116,7 +116,7 @@ const url = new URL(window.location.href);
             const payload = new URLSearchParams(data);
            
             fetch(`http:/localhost:9090/deptAdmin/update/${documentId}`, {
-            method: 'POST',
+            method: 'PUT',
             body: payload,
             })
             .then((res)=>{

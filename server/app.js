@@ -7,6 +7,8 @@ let bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
 let connectionString = "mongodb://127.0.0.1:27017";
 let path = require("path");
+require('dotenv').config();
+let port = process.env.PORT || 9080;
 const { ObjectId } = require("mongodb");
 app.use(bodyParser.json());
 app.use(cors());
@@ -188,8 +190,7 @@ app.post(
     res.send("data received successfully");
   }
 );
-app.listen(9090);
-console.log("server started");
+
 
 /**
  * consume api data
@@ -232,34 +233,62 @@ app.get('/deptAdmin/update/:id',(req,res)=>{
     }
   });
 })
-app.put('/deptAdmin/update/id',(req,res)=>{
-  let department = req.body.department;
+app.put('/deptAdmin/update/:id',(req,res)=>{
+  let id = req.params.id;
   let username = req.body.username;
   let password = req.body.password;
-  let email = req.body.email;
+  
   let data = {
-    department: department,
+    
     username: username,
     password: password,
-    email: email,
+    
   };
 
-  let id = req.params.id;
+  
   mongoClient.connect(connectionString, (err, clientObject) => {
     if (!err) {
       let dbo = clientObject.db("DavEms");
-      dbo
-        .collection("DeptAdmin")
-        .updateOne({ _id: ObjectId(id)  }, { $set: data }, (err, result) => {
+      dbo.collection("DeptAdmin").updateOne(
+        { _id: ObjectId(id) },
+        { $set: data },
+        (err, result) => {
           if (!err) {
-            console.log("Record updated successfully");
-            res.status(204).send();
+            if (result.modifiedCount === 1) {
+              console.log("Record updated successfully");
+              res.status(204).send();
+            } else {
+              console.log("No matching record found");
+              res.status(404).send();
+            }
+          } else {
+            console.error("Error updating record:", err);
+            res.status(500).send("Internal Server Error");
           }
-        });
-      
+        }
+      );
+    } else {
+      console.error("Error connecting to the database:", err);
+      res.status(500).send("Internal Server Error");
     }
+
+  
+  // mongoClient.connect(connectionString, (err, clientObject) => {
+  //   if (!err) {
+  //     let dbo = clientObject.db("DavEms");
+  //     dbo
+  //       .collection("DeptAdmin")
+  //       .updateOne({ _id: ObjectId(id)  }, { $set: data }, (err, result) => {
+  //         if (!err) {
+  //           console.log("Record updated successfully");
+  //           res.status(204).send();
+  //         }
+  //       });
+      
+  //   }
    
-  });
+  // });
+  })
 
 })
 
@@ -287,3 +316,24 @@ app.get("/deptAdmin/delete/:id", (req, res) => {
    
   });
 });
+
+
+
+
+
+
+
+
+
+/**
+ * @server : server is running on port(value)
+ * @url :http://localhost:port
+ */
+app.listen(port,(err)=>{
+  if(err){
+    console.log(err);
+  }else{
+    console.log("Server is running on port "+port);
+  }
+});
+
