@@ -232,34 +232,62 @@ app.get('/deptAdmin/update/:id',(req,res)=>{
     }
   });
 })
-app.put('/deptAdmin/update/id',(req,res)=>{
-  let department = req.body.department;
+app.put('/deptAdmin/update/:id',(req,res)=>{
+  let id = req.params.id;
   let username = req.body.username;
   let password = req.body.password;
-  let email = req.body.email;
+  
   let data = {
-    department: department,
+    
     username: username,
     password: password,
-    email: email,
+    
   };
 
-  let id = req.params.id;
+  
   mongoClient.connect(connectionString, (err, clientObject) => {
     if (!err) {
       let dbo = clientObject.db("DavEms");
-      dbo
-        .collection("DeptAdmin")
-        .updateOne({ _id: ObjectId(id)  }, { $set: data }, (err, result) => {
+      dbo.collection("DeptAdmin").updateOne(
+        { _id: ObjectId(id) },
+        { $set: data },
+        (err, result) => {
           if (!err) {
-            console.log("Record updated successfully");
-            res.status(204).send();
+            if (result.modifiedCount === 1) {
+              console.log("Record updated successfully");
+              res.status(204).send();
+            } else {
+              console.log("No matching record found");
+              res.status(404).send();
+            }
+          } else {
+            console.error("Error updating record:", err);
+            res.status(500).send("Internal Server Error");
           }
-        });
-      
+        }
+      );
+    } else {
+      console.error("Error connecting to the database:", err);
+      res.status(500).send("Internal Server Error");
     }
+
+  
+  // mongoClient.connect(connectionString, (err, clientObject) => {
+  //   if (!err) {
+  //     let dbo = clientObject.db("DavEms");
+  //     dbo
+  //       .collection("DeptAdmin")
+  //       .updateOne({ _id: ObjectId(id)  }, { $set: data }, (err, result) => {
+  //         if (!err) {
+  //           console.log("Record updated successfully");
+  //           res.status(204).send();
+  //         }
+  //       });
+      
+  //   }
    
-  });
+  // });
+  })
 
 })
 
