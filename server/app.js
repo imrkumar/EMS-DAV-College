@@ -7,12 +7,23 @@ let bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
 let connectionString = "mongodb://127.0.0.1:27017";
 let path = require("path");
-require('dotenv').config();
+let jwt = require("jsonwebtoken");
+require("dotenv").config();
 let port = process.env.PORT || 9080;
 const { ObjectId } = require("mongodb");
 app.use(bodyParser.json());
 app.use(cors());
 
+const secret_key = "admin";
+
+/**
+ * @route /
+ * @description "This is default route"
+ * @method GET
+ * @params N/A
+ * @return_Type JSON Object
+ *
+ */
 app.get("/", (req, res) => {
   res.send({
     about: "This is Event management of DAV College.",
@@ -20,6 +31,15 @@ app.get("/", (req, res) => {
 });
 
 //admin-login
+
+/**
+ * @route /admin-login
+ * @description "This is admin login route"
+ * @method POST
+ * @params N/A
+ * @return_Type N/A
+ *
+ */
 
 app.post("/admin-login", (req, res) => {
   let username = req.body.username;
@@ -32,22 +52,54 @@ app.post("/admin-login", (req, res) => {
         .collection("adminlogin")
         .find({})
         .toArray((err, documents) => {
+
           if (!err) {
             if (
               username === documents[0].Admin &&
               password === documents[0].Password
             ) {
-              res.status(200);
-              console.log("login success");
+              const user = { username: username };
+              const token = jwt.sign(user, secret_key);
+              res.status(200).json({ token: token, message: 'Login success' });
             } else {
-              res.status(401);
-              console.log("data does not match");
+              res.status(401).json({ message: 'Invalid credentials' });
             }
+          } else {
+            console.error('Error fetching documents:', err);
+            res.status(500).json({ message: 'Internal Server Error' });
           }
+
+          // if (!err) {
+          //   if (
+          //     username === documents[0].Admin &&
+          //     password === documents[0].Password
+          //   ) {
+          //     res.status(200);
+          //     console.log("login success");
+          //   } else {
+          //     res.status(401);
+          //     console.log("data does not match");
+          //   }
+          // }
         });
+    }else {
+      console.error('Error connecting to the database:', err);
+      res.status(500).json({ message: 'Internal Server Error' });
     }
   });
-  res.send("data received");
+});
+
+app.get('/protected-resource', (req, res) => {
+  // Middleware to check for a valid token
+  const token = req.header('Authorization');
+  if (!token) return res.status(401).json({ message: 'Access Denied' });
+
+  jwt.verify(token, secret_key, (err, user) => {
+    if (err) return res.status(403).json({ message: 'Invalid Token' });
+
+    // User is authenticated, continue with the protected resource logic
+    res.json({ message: 'Access Granted', user: user });
+  });
 });
 
 // AddDeptAdmin
@@ -110,34 +162,72 @@ app.get("/department", (req, res) => {
 });
 
 //department admin login
-app.post("/department/login", (req, res) => {
-  let department = req.body.department;
-  let username = req.body.username;
-  let password = req.body.password;
+// app.post("/department/login", (req, res) => {
+//   let department = req.body.department;
+//   let username = req.body.username;
+//   let password = req.body.password;
+
+//   mongoClient.connect(connectionString, (err, clientObject) => {
+//     if (!err) {
+//       let dbo = clientObject.db("DavEms");
+//       dbo
+//         .collection("DeptAdmin")
+//         .find({ department: department })
+//         .toArray((err, documents) => {
+//           if (!err) {
+//             if (
+//               department == documents[0].department &&
+//               username == documents[0].username &&
+//               password == documents[0].password
+//             ) {
+//               const user = { username: username };
+//               const token = jwt.sign(user, secret_key);
+//               res.status(200).json({ token: token, message: 'Login success' });
+//             } else {
+//               res.status(401).json({ message: 'Invalid credentials' });
+//             }
+//           }
+//         });
+//     }
+//   });
+//   res.send("data received successfully");
+// });
+
+app.post('/department/login', (req, res) => {
+  const department = req.body.department;
+  const username = req.body.username;
+  const password = req.body.password;
 
   mongoClient.connect(connectionString, (err, clientObject) => {
     if (!err) {
-      let dbo = clientObject.db("DavEms");
-      dbo
-        .collection("DeptAdmin")
-        .find({ department: department })
-        .toArray((err, documents) => {
-          if (!err) {
-            if (
-              department == documents[0].department &&
-              username == documents[0].username &&
-              password == documents[0].password
-            ) {
-                console.log("login success");
-            } else {
-              res.status(401);
-              console.log("login denied");
-            }
-          } 
-        });
+      const dbo = clientObject.db('DavEms');
+      dbo.collection('DeptAdmin').find({ department: department }).toArray((err, documents) => {
+        if (!err) {
+          if (
+            documents.length > 0 &&
+            department === documents[0].department &&
+            username === documents[0].username &&
+            password === documents[0].password
+          ) {
+            const user = { username: username };
+            const token = jwt.sign(user, secret_key);
+            res.status(200).json({ token: token, message: 'Login success' });
+          } else {
+            res.status(401).json({ message: 'Invalid credentials' });
+          }
+        } else {
+          console.error('Error fetching documents:', err);
+          res.status(500).json({ message: 'Internal Server Error' });
+        }
+
+        // Close the MongoDB connection after processing
+        clientObject.close();
+      });
+    } else {
+      console.error('Error connecting to the database:', err);
+      res.status(500).json({ message: 'Internal Server Error' });
     }
-  }); 
-  res.send("data received successfully");
+  });
 });
 
 const storage = multer.diskStorage({
@@ -159,7 +249,7 @@ app.post(
     { name: "eventBanner", maxCount: 1 },
     { name: "attendance", maxCount: 1 },
     { name: "eventPic", maxCount: 10 },
-    { name: "mediaCoverage", maxCount: 10 }, 
+    { name: "mediaCoverage", maxCount: 10 },
   ]),
   (req, res) => {
     let data = {
@@ -191,7 +281,6 @@ app.post(
   }
 );
 
-
 /**
  * consume api data
  */
@@ -205,9 +294,9 @@ app.get("/getEventData", (req, res) => {
         .find({})
         .toArray((err, documents) => {
           if (!err) {
-            res.send(documents); 
+            res.send(documents);
           }
-        });   
+        });
     }
   });
 });
@@ -217,42 +306,38 @@ app.get("/getEventData", (req, res) => {
  * @api: /deptAdmin/update
  */
 
-app.get('/deptAdmin/update/:id',(req,res)=>{
+app.get("/deptAdmin/update/:id", (req, res) => {
   let id = req.params.id;
   mongoClient.connect(connectionString, (err, clientObject) => {
     if (!err) {
       let dbo = clientObject.db("DavEms");
       dbo
-     .collection("DeptAdmin")
-     .find({ _id: ObjectId(id) })
-     .toArray((err, documents) => {
-          if (!err) { 
-            res.send(documents);  
+        .collection("DeptAdmin")
+        .find({ _id: ObjectId(id) })
+        .toArray((err, documents) => {
+          if (!err) {
+            res.send(documents);
           }
-        });   
+        });
     }
   });
-})
-app.put('/deptAdmin/update/:id',(req,res)=>{
+});
+app.put("/deptAdmin/update/:id", (req, res) => {
   let id = req.params.id;
   let username = req.body.username;
   let password = req.body.password;
-  
+
   let data = {
-    
     username: username,
     password: password,
-    
   };
 
-  
   mongoClient.connect(connectionString, (err, clientObject) => {
     if (!err) {
       let dbo = clientObject.db("DavEms");
-      dbo.collection("DeptAdmin").updateOne(
-        { _id: ObjectId(id) },
-        { $set: data },
-        (err, result) => {
+      dbo
+        .collection("DeptAdmin")
+        .updateOne({ _id: ObjectId(id) }, { $set: data }, (err, result) => {
           if (!err) {
             if (result.modifiedCount === 1) {
               console.log("Record updated successfully");
@@ -265,39 +350,35 @@ app.put('/deptAdmin/update/:id',(req,res)=>{
             console.error("Error updating record:", err);
             res.status(500).send("Internal Server Error");
           }
-        }
-      );
+        });
     } else {
       console.error("Error connecting to the database:", err);
       res.status(500).send("Internal Server Error");
     }
 
-  
-  // mongoClient.connect(connectionString, (err, clientObject) => {
-  //   if (!err) {
-  //     let dbo = clientObject.db("DavEms");
-  //     dbo
-  //       .collection("DeptAdmin")
-  //       .updateOne({ _id: ObjectId(id)  }, { $set: data }, (err, result) => {
-  //         if (!err) {
-  //           console.log("Record updated successfully");
-  //           res.status(204).send();
-  //         }
-  //       });
-      
-  //   }
-   
-  // });
-  })
+    // mongoClient.connect(connectionString, (err, clientObject) => {
+    //   if (!err) {
+    //     let dbo = clientObject.db("DavEms");
+    //     dbo
+    //       .collection("DeptAdmin")
+    //       .updateOne({ _id: ObjectId(id)  }, { $set: data }, (err, result) => {
+    //         if (!err) {
+    //           console.log("Record updated successfully");
+    //           res.status(204).send();
+    //         }
+    //       });
 
-})
+    //   }
+
+    // });
+  });
+});
 
 /**
  * @name: delete department admin
  * @api: /deptAdmin/delete
  */
 
- 
 app.get("/deptAdmin/delete/:id", (req, res) => {
   let id = req.params.id;
   mongoClient.connect(connectionString, (err, clientObject) => {
@@ -311,29 +392,18 @@ app.get("/deptAdmin/delete/:id", (req, res) => {
             res.status(204).send();
           }
         });
-      
     }
-   
   });
 });
-
-
-
-
-
-
-
-
 
 /**
  * @server : server is running on port(value)
  * @url :http://localhost:port
  */
-app.listen(port,(err)=>{
-  if(err){
+app.listen(port, (err) => {
+  if (err) {
     console.log(err);
-  }else{
-    console.log("Server is running on port "+port);
+  } else {
+    console.log("Server is running on port " + port);
   }
 });
-
