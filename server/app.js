@@ -396,6 +396,33 @@ app.get("/deptAdmin/delete/:id", (req, res) => {
   });
 });
 
+
+/**
+ * @route /event/:id
+ * @description "This route is use to get single event details based on id"
+ * @method GET
+ * @params N/A
+ * @return_Type JSON Object
+ *
+ */
+app.get('/event/:id',(req,res)=>{
+  let id = req.params.id;
+  mongoClient.connect(connectionString, (err, clientObject) => {
+    if (!err) {
+      let dbo = clientObject.db("DavEms");
+      dbo
+      .collection("DeptActivity")
+      .find({ _id: ObjectId(id) })
+      .toArray((err, documents) => {
+          if (!err) {
+            res.send(documents);
+          }
+        });
+    }
+  });
+})
+
+
 /**
  * @server : server is running on port(value)
  * @url :http://localhost:port
