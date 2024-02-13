@@ -6,10 +6,10 @@ let mongoClient = require("mongodb").MongoClient;
 let bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
 let connectionString = "mongodb://127.0.0.1:27017";
-let path = require("path");
+let path = require('path');
 let jwt = require("jsonwebtoken");
 require("dotenv").config();
-let port = process.env.PORT || 9080;
+let port = process.env.PORT || 9090;
 const { ObjectId } = require("mongodb");
 app.use(bodyParser.json());
 app.use(cors());
@@ -230,9 +230,11 @@ app.post('/department/login', (req, res) => {
   });
 });
 
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "../public/backend/images");
+    const destinationPath = path.join('..','public', 'backend', 'images');
+    cb(null, destinationPath)
   },
   filename: function (req, file, cb) {
     cb(null, `${Date.now()}-${file.originalname}`);
@@ -241,10 +243,10 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
+
+
 // add department activity
-app.post(
-  "/department/activity",
-  upload.fields([
+app.post("/department/activity", upload.fields([
     { name: "eventNotice", maxCount: 1 },
     { name: "eventBanner", maxCount: 1 },
     { name: "attendance", maxCount: 1 },
