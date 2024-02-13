@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,8 +22,8 @@
             <h1 class="short-heading">DEMS</h1>
         </nav>  -->
         <nav class="navbar navbar-expand-lg ">
-            <div class="logo-container"> <a href="index.html"><img src="images/test.jpg" class="main-logo"></a></div>
-            
+            <div class="logo-container"> <a href="index.html"><img src="images/test.png" class="main-logo"></a></div>
+
 
             <div class="container-fluid">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
@@ -53,13 +52,6 @@
             </div>
         </nav>
     </header>
-
-
-
-
-
-
-
 
     <div id="carouselExampleAutoplaying" class="carousel slide p-2" data-bs-ride="carousel">
         <div class="carousel-inner">
@@ -252,11 +244,7 @@
         </footer>
     </div>
 
-
-
-
     <script>
-
         const datacon1 = document.getElementById('allEvent');
         fetch("http://localhost:9090/getEventData", {
             method: "get",
@@ -270,6 +258,7 @@
                 let div = document.createElement('div')
 
                 div.innerHTML = `
+                <a href="eventsfulldetailpage.html?id=${data[item]._id}" >
             <div class="card">
                 <div class="card-header">
                     <img src="${data[item].eventBanner}" width="100%" height="250px">
@@ -289,6 +278,7 @@
                     </p>
                 </div>
             </div>
+            <a/>
        `;
                 datacon1.append(div);
             }
@@ -430,38 +420,6 @@
             document.getElementById("pastEvent").style.display = block;
         }
 
-
-        // var btn = document.querySelectorAll("button");
-
-        // btn.forEach((sbtn) => {
-        //     sbtn.addEventListener('click', () => {
-        //         if (sbtn.id == "b1") {
-        //             allEvent();
-        //             upcomingEvent("none")
-        //             presentEvent("none")
-        //             pastEvent("none")
-
-        //         } else if (sbtn.id == "b2") {
-        //             upcomingEvent()
-        //             allEvent("none");
-        //             presentEvent("none")
-        //             pastEvent("none")
-        //         }
-        //         else if (sbtn.id == "b3") {
-        //             presentEvent();
-        //             allEvent("none");
-        //             upcomingEvent("none")
-        //             pastEvent("none")
-        //         }
-        //         else if (sbtn.id == "b4") {
-        //             pastEvent();
-        //             allEvent("none");
-        //             upcomingEvent("none")
-        //             presentEvent("none")
-        //         }
-        //     })
-        // })
-
         function toggleEventSection(sectionId, displayValue = "flex") {
             const section = document.getElementById(sectionId);
             section.style.display = displayValue;
@@ -495,12 +453,6 @@
             });
         });
 
-
-
-
-
     </script>
-
 </body>
-
 </html>

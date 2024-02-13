@@ -29,7 +29,6 @@
         }
     </style>
 </head>
-
 <body>
     <div class="container-fluid" id="container">
         <form class="border border-dark p-lg-5 rounded-3" id="Data">
@@ -39,7 +38,8 @@
                 <dd><input type="text" class="form-control" id="username" name="username"></dd>
                 <dt><label class="form-label" for="password">Password</label></dt>
                 <dd><input type="password" class="form-control" name="password" id="password"></dd>
-            </dl>
+                <dd id="message" class="text-danger"></dd>
+            </dl>  
             <div class="text-center mt-4">
                 <button id="submit" class="btn btn bg-success  text-white ">LOGIN</button>
                 <button class="btn btn-danger " id="cancel"><a href="index.html">Cancel</a> </button>
@@ -47,8 +47,6 @@
         </form>
 
     </div>
-
-
     <script>
         const form = document.getElementById('Data');
         form.addEventListener('submit', function (e) {
@@ -66,11 +64,16 @@
                 .then((res) => {
                     if (res.status == 200) {
                         location.href = "../public/adminDashboard.html"
+                    } else if (res.status === 401) {
+                        // Handle unauthorized (401) response
+                        res.json().then(data => {
+                          let msg =  document.getElementById("message").innerHTML = data.message;
+                          
+                        }).catch(error => {
+                            console.error('Error parsing JSON:', error);
+                        });
                     }
-
                 })
-
-
         })
     </script>
 </body>

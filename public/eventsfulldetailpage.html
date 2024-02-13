@@ -12,7 +12,7 @@
     <link rel="icon" href="images/logo.png">
 </head>
 <body>
-    <header>
+    <!-- <header>
         <nav class="nav-header">
             <div class="logo-container"> <a href="index.html"><img src="images/logo.png" class="main-logo"></a></div>
             <h1 class="long-heading"> DAV COLLEGE EVENT MANAGEMENT SYSTEM</h1>
@@ -45,12 +45,10 @@
                 </div>
             </div>
         </nav>
-    </header>
+    </header> -->
 
-  <div class="main">
-    <div>
-        <img src="images/aboutBanner.png"/>
-    </div>
+  <div id="main">
+    
     <div>
         
     </div>
@@ -148,5 +146,27 @@
             </div>
         </footer>
     </div>
+
+
+    <script>
+        const url=new URL(window.location.href);
+        const documentId = url.searchParams.get('id');
+        console.log(documentId)
+        fetch(`http://localhost:9090/event/${documentId}`,{
+            method: "GET"
+        })
+        .then(res=>res.json())
+        
+        .then((data)=>{
+            console.log(data)
+            let div = document.createElement('div')
+            div.innerHTML =
+            `
+            <img src='${data[0].eventBanner}'/>
+            <p>${data[0].eventReport}</p>
+            `
+             document.getElementById('main').append(div)
+        })
+    </script>
 </body>
 </html>
