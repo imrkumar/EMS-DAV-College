@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,40 +12,41 @@
     <link rel="stylesheet" href="CSS/style.css">
     <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <link rel="icon" href="images/logo.png">
-
+    <style>
+        .decoration {
+            text-decoration: none;
+        }
+    </style>
 </head>
 
 <body>
     <header>
-        <!-- <nav class="nav-header">
-            <div class="logo-container"> <a href="index.html"><img src="images/logo.png" class="main-logo"></a></div>
-            <h1 class="long-heading"> DAV COLLEGE EVENT MANAGEMENT SYSTEM</h1>
-            <h1 class="short-heading">DEMS</h1>
-        </nav>  -->
         <nav class="navbar navbar-expand-lg ">
-            <div class="logo-container"> <a href="index.html"><img src="images/test.png" class="main-logo"></a></div>
+            <div class="logo-container"> <a href="index.html"><img src="images/emsLogo.png" class="main-logo"
+                        style="object-fit: contain;"></a></div>
 
 
-            <div class="container-fluid" id="tabs" >
+            <div class="container-fluid" id="tabs">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
                     aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarText">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link " aria-current="page" href="index.html">HOME</a>
+                        <li class="nav-item tabs-margin">
+                            <a class="nav-link " aria-current="page" href="index.html"
+                                style="border-bottom: 2px solid #a24236;">HOME</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item tabs-margin">
                             <a class="nav-link" href="/public/admin_login.html">ADMIN</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item tabs-margin">
                             <a class="nav-link" href="dept_login.html">DEPARTMENT LOGIN</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">CONTACT US</a>
+                        <li class="nav-item tabs-margin">
+                            <a class="nav-link" href="contact.html">CONTACT US</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item tabs-margin">
                             <a class="nav-link" href="aboutus.html">ABOUT US</a>
                         </li>
                     </ul>
@@ -57,7 +59,7 @@
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <img src="https://images.bhaskarassets.com/web2images/521/2023/11/08/100_1699361253654a31e5e3280_7nov3.jpg"
-                    class="d-block w-100 h-100" alt="..." >
+                    class="d-block w-100 h-100" alt="...">
             </div>
             <div class="carousel-item">
                 <img src="https://images.collegedunia.com/public/college_data/images/campusimage/15100501711big.jpg"
@@ -78,10 +80,10 @@
     </div><BR><br><br>
     <h2 class="mb-4" id="ue-heading">EVENT GALLERY</h2>
     <div class="buttons">
-        <button class="btn btn-danger" id="b1">All Event</button>
-        <button class="btn btn-danger" id="b2">Upcoming Event</button>
-        <button class="btn btn-danger" id="b3">Present Event</button>
-        <button class="btn btn-danger" id="b4">Past Event</button>
+        <button class="btns " id="b1">All Event</button>
+        <button class="btns " id="b2">Upcoming Event</button>
+        <button class="btns " id="b3">Present Event</button>
+        <button class="btns " id="b4">Past Event</button>
     </div><br>
     <div class="main" id="allEvent">
 
@@ -98,7 +100,7 @@
     </div>
 
 
-    <!-- <div class="container" style="border-top: 2px solid whitesmoke;">
+    <div class="container" style="border-top: 2px solid whitesmoke;">
         <footer class="py-5">
             <div class="row">
                 <div class="col-6 col-md-2 mb-3">
@@ -150,10 +152,8 @@
                 </div>
 
                 <div class="col-md-5 offset-md-1 mb-3">
-                    <div>
-                    <img src="images/footer.jpg">
-                    </div>
-                    <div>
+
+                    <div class="footer-bg">
                         <p>
                             A premier educational institution of North India, DAV College Amritsar has high academic
                             standing and a reputation for excellence in research and teaching which is reflected in the
@@ -172,79 +172,29 @@
             <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
                 <p>Managed and Maintained By: PG Department of Computer Science and IT, DAV College, Amritsar, All
                     Rights Reserved. © 2023 Coded By : <a href="" class=""> Website Committee</a> </p>
-                <ul class="list-unstyled d-flex">
-                    <li class="ms-3"><a class="link-body-emphasis" href="#"><svg class="bi" width="24" height="24">
-                                <use xlink:href="#twitter"></use>
-                            </svg></a></li>
-                    <li class="ms-3"><a class="link-body-emphasis" href="#"><svg class="bi" width="24" height="24">
-                                <use xlink:href="#instagram"></use>
-                            </svg></a></li>
-                    <li class="ms-3"><a class="link-body-emphasis" href="#"><svg class="bi" width="24" height="24">
-                                <use xlink:href="#facebook"></use>
-                            </svg></a></li>
-                </ul>
+
             </div>
-        </footer>
-    </div> -->
-
-
-    <div class="container">
-        <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 my-5 border-top">
-            <div class="col mb-3">
-                <h5>Section</h5>
-                <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Features</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
-                </ul>
-            </div>
-
-            <div class="col mb-3">
-                <h5>Section</h5>
-                <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Features</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
-                </ul>
-            </div>
-
-            <div class="col mb-3">
-                <h5>Section</h5>
-                <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Features</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
-                </ul>
-            </div>
-
-            <div class="col mb-3">
-
-                <a href="index.html"><img src="images/test" class="main-logo"></a>
-
-
-                <p class="text-body-secondary">
-                    A premier educational institution of North India, DAV College Amritsar has high academic
-                    standing and a reputation for excellence in research and teaching which is reflected in the
-                    demand for courses for high achieving students, the relevance of graduates to the community
-                    in which they work , the quality of staff and their strong performance and commitment to
-                    research. A gateway to academic and professional excellence, this multi-faculty,
-                    multi-facility postgraduate (co-ed) College is famous for providing cutting edges to
-                    academic and co-academic skills through its commitment to innovative and student-friendly
-                    initiatives. The college has created an inimitable academic space for itself within nearly
-                    five decades of its monumental existence.
-                </p>
-            </div>
-
         </footer>
     </div>
 
+
+
+
     <script>
+        function handleButtonClick(buttonId) {
+            var btn = document.querySelectorAll("button.btns");
+            btn.forEach((sbtn) => {
+                if (sbtn.id === buttonId) {
+                    sbtn.classList.add('active');
+                } else {
+                    sbtn.classList.remove('active');
+                }
+            });
+        }
+        function setInitialActiveButton() {
+        var allEventButton = document.getElementById("b1");
+        allEventButton.classList.add('active');
+    }
         const datacon1 = document.getElementById('allEvent');
         fetch("http://localhost:9090/getEventData", {
             method: "get",
@@ -258,24 +208,24 @@
                 let div = document.createElement('div')
 
                 div.innerHTML = `
-                <a href="eventsfulldetailpage.html?id=${data[item]._id}" >
+                <a href="eventsfulldetailpage.html?id=${data[item]._id}" class="decoration">
             <div class="card">
                 <div class="card-header">
-                    <img src="${data[item].eventBanner}" width="100%" height="250px">
+                    <img src="${data[item].eventBanner}" width="100%" >
                 </div>
                 <div class="card-body">
-                    <p class="card-text text-center fw-bold" style="color:#a24236 ; font-size:22px; margin-bottom:0px !important">
+                    <p class="card-text text-center fw-bold" style="color:#a24236 ; font-size:22px; ">
                          ${data[item].eventName}
                     </p>
-                    <p class="card-text" >
-                         ${data[item].eventReport}
-                    </p>
-                    <p class="card-text">
-                      <span class="fw-bold">Event Incharge :</span> ${data[item].resourcePerson}
-                    </p>
+                  
                     <p class="card-text">
                         <span class="fw-bold">Event Date :</span> ${data[item].eventDate}
                     </p>
+                    <p class="card-text">
+                      <span class="fw-bold  badge-secondary">Event Incharge :</span> ${data[item].resourcePerson}
+                    </p>
+                    <button class="btn btn-success" style="position:absolute; right:25px ">Read more</button>
+                    <p class="card-text">
                 </div>
             </div>
             <a/>
@@ -284,46 +234,97 @@
             }
         });
 
+        // const datacon2 = document.getElementById('upcomingEvent');
+        // fetch("http://localhost:9090/getEventData", {
+        //     method: "get",
+        // }).then((res) => {
+        //     return res.json()
+        // }).then((data) => {
+
+        //     const currentDate = new Date();
+
+
+        //     const todayEvents = data.filter(event => new Date(event.eventDate) > currentDate);
+
+
+        //     todayEvents.sort((a, b) => new Date(a.eventDate) - currentDate - (new Date(b.eventDate) - currentDate));
+
+        //     for (let item = 0; item < todayEvents.length; item++) {
+        //         let div = document.createElement('div')
+
+
+        //         div.innerHTML = `
+        //         <a href="eventsfulldetailpage.html?id=${data[item]._id}" class="decoration">
+        //     <div class="card">
+        //         <div class="card-header">
+        //             <img src="${data[item].eventBanner}" width="100%" >
+        //         </div>
+        //         <div class="card-body">
+        //             <p class="card-text text-center fw-bold" style="color:#a24236 ; font-size:22px; ">
+        //                  ${data[item].eventName}
+        //             </p>
+        //            <p class="card-text">
+        //               <span class="fw-bold  badge-secondary">Event Incharge :</span> ${data[item].resourcePerson}
+        //             </p>
+        //             <p class="card-text">
+        //                 <span class="fw-bold">Event Date :</span> ${data[item].eventDate}
+        //             </p>
+        //             <button class="btn btn-success" style="position:absolute; right:25px ">Read more</button>
+        //             <p class="card-text">
+        //         </div>
+        //     </div>
+        //     <a/>
+        //        `;
+        //         datacon2.append(div);
+        //     }
+        // })
+
         const datacon2 = document.getElementById('upcomingEvent');
-        fetch("http://localhost:9090/getEventData", {
-            method: "get",
-        }).then((res) => {
-            return res.json()
-        }).then((data) => {
+fetch("http://localhost:9090/getEventData", {
+    method: "get",
+}).then((res) => {
+    return res.json();
+}).then((data) => {
+    const currentDate = new Date();
 
-            const currentDate = new Date();
+    const upcomingEvents = data.filter(event => {
+        const eventDate = new Date(event.eventDate);
+        // Compare dates without considering time
+        return eventDate.setHours(0, 0, 0, 0) > currentDate.setHours(0, 0, 0, 0);
+    });
 
+    // Sort upcoming events by event date in ascending order
+    upcomingEvents.sort((a, b) => new Date(a.eventDate) - new Date(b.eventDate));
 
-            const todayEvents = data.filter(event => new Date(event.eventDate) > currentDate);
+    for (let item = 0; item < upcomingEvents.length; item++) {
+        let div = document.createElement('div');
 
+        div.innerHTML = `
+        <a href="eventsfulldetailpage.html?id=${upcomingEvents[item]._id}" class="decoration">
+            <div class="card">
+                <div class="card-header">
+                    <img src="${upcomingEvents[item].eventBanner}" width="100%">
+                </div>
+                <div class="card-body">
+                    <p class="card-text text-center fw-bold" style="color:#a24236 ; font-size:22px; ">
+                         ${upcomingEvents[item].eventName}
+                    </p>
+                    <p class="card-text">
+                        <span class="fw-bold  badge-secondary">Event Incharge :</span> ${upcomingEvents[item].resourcePerson}
+                    </p>
+                    <p class="card-text">
+                        <span class="fw-bold">Event Date :</span> ${upcomingEvents[item].eventDate}
+                    </p>
+                    <button class="btn btn-success" style="position:absolute; right:25px ">Read more</button>
+                    <p class="card-text">
+                </div>
+            </div>
+        </a/>
+       `;
+        datacon2.append(div);
+    }
+});
 
-            todayEvents.sort((a, b) => new Date(a.eventDate) - currentDate - (new Date(b.eventDate) - currentDate));
-
-            for (let item = 0; item < todayEvents.length; item++) {
-                let div = document.createElement('div')
-
-
-                div.innerHTML = `
-                    <div class="card">
-                        <div class="card-header">
-                            <img src="${todayEvents[item].eventBanner}" width="100%" height="250px">
-                        </div>
-                        <div class="card-body">
-                            <p class="card-text">
-                                <span class="fw-bold">Event Name :</span> ${todayEvents[item].eventName}
-                            </p>
-                            <p class="card-text">
-                                <span class="fw-bold">Event Incharge :</span> ${todayEvents[item].resourcePerson}
-                            </p>
-                            <p class="card-text">
-                                <span class="fw-bold">Event Date :</span> ${todayEvents[item].eventDate}
-                            </p>
-                        </div>
-                    </div>
-               `;
-                datacon2.append(div);
-            }
-        })
 
 
         const datacon3 = document.getElementById('presentEvent');
@@ -346,66 +347,80 @@
                 let div = document.createElement('div');
 
                 div.innerHTML = `
-                <div class="card">
-                    <div class="card-header">
-                        <img src="${event.eventBanner}" width="100%" height="250px">
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">
-                            <span class="fw-bold">Event Name :</span> ${event.eventName}
-                        </p>
-                        <p class="card-text">
-                            <span class="fw-bold">Event Incharge :</span> ${event.resourcePerson}
-                        </p>
-                        <p class="card-text">
-                            <span class="fw-bold">Event Date :</span> ${event.eventDate}
-                        </p>
-                    </div>
+        <a href="eventsfulldetailpage.html?id=${event._id}" class="decoration">
+            <div class="card">
+                <div class="card-header">
+                    <img src="${event.eventBanner}" width="100%" >
                 </div>
-            `;
+                <div class="card-body">
+                    <p class="card-text text-center fw-bold" style="color:#a24236 ; font-size:22px; ">
+                         ${event.eventName}
+                    </p>
+                    <p class="card-text">
+                        <span class="fw-bold  badge-secondary">Event Incharge :</span> ${event.resourcePerson}
+                    </p>
+                    <p class="card-text">
+                        <span class="fw-bold">Event Date :</span> ${event.eventDate}
+                    </p>
+                    <button class="btn btn-success" style="position:absolute; right:25px ">Read more</button>
+                    <p class="card-text">
+                </div>
+            </div>
+        <a/>
+        `;
                 datacon3.append(div);
             });
         });
 
 
+      
         const datacon4 = document.getElementById('pastEvent');
+
         fetch("http://localhost:9090/getEventData", {
             method: "get",
         }).then((res) => {
-            return res.json()
+            return res.json();
         }).then((data) => {
             const currentDate = new Date();
 
+            // Filter only past events (excluding today and future events)
+            const pastEvents = data.filter(event => {
+                const eventDate = new Date(event.eventDate);
+                return eventDate.toISOString().split('T')[0] < currentDate.toISOString().split('T')[0];
+            });
 
-            const pastEvents = data.filter(event => new Date(event.eventDate) < currentDate);
-
+            // Sort past events by event date in descending order
             pastEvents.sort((a, b) => new Date(b.eventDate) - new Date(a.eventDate));
 
+            // Display past events
             for (let item = 0; item < pastEvents.length; item++) {
-                let div = document.createElement('div')
+                let div = document.createElement('div');
 
                 div.innerHTML = `
+        <a href="eventsfulldetailpage.html?id=${pastEvents[item]._id}" class="decoration">
             <div class="card">
                 <div class="card-header">
-                    <img src="${pastEvents[item].eventBanner}" width="100%" height="250px">
+                    <img src="${pastEvents[item].eventBanner}" width="100%">
                 </div>
                 <div class="card-body">
-                    <p class="card-text">
-                        <span class="fw-bold">Event Name :</span> ${pastEvents[item].eventName}
+                    <p class="card-text text-center fw-bold" style="color:#a24236; font-size:22px;">
+                         ${pastEvents[item].eventName}
                     </p>
                     <p class="card-text">
-                        <span class="fw-bold">Event Incharge :</span> ${pastEvents[item].resourcePerson}
+                        <span class="fw-bold  badge-secondary">Event Incharge :</span> ${pastEvents[item].resourcePerson}
                     </p>
                     <p class="card-text">
                         <span class="fw-bold">Event Date :</span> ${pastEvents[item].eventDate}
                     </p>
+                    <button class="btn btn-success" style="position:absolute; right:25px ">Read more</button>
+                    <p class="card-text">
                 </div>
             </div>
+        </a/>
        `;
                 datacon4.append(div);
             }
         });
-
 
         function allEvent(block = "block") {
             document.getElementById("allEvent").style.display = block;
@@ -425,7 +440,11 @@
             section.style.display = displayValue;
         }
 
-        var btn = document.querySelectorAll("button");
+        document.addEventListener('DOMContentLoaded', function () {
+        // Set the "active" class on page load
+        setInitialActiveButton();
+        
+        var btn = document.querySelectorAll("button.btns");
 
         btn.forEach((sbtn) => {
             sbtn.addEventListener('click', () => {
@@ -450,9 +469,13 @@
                     toggleEventSection("upcomingEvent", "none");
                     toggleEventSection("presentEvent", "none");
                 }
+
+                // Call the function to handle button clicks
+                handleButtonClick(sbtn.id);
             });
         });
-
+    });
     </script>
 </body>
+
 </html>

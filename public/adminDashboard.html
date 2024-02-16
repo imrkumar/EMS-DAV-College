@@ -8,9 +8,9 @@
   <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" />
  
   <link rel="stylesheet" href="/node_modules/bootstrap-icons/font/bootstrap-icons.css" />
-  <link rel="stylesheet" href="CSS/style.css">
+
   <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-  <link rel="icon" href="images/logo.png" />
+ 
   <style>
     #container {
       display: flex;
@@ -37,6 +37,9 @@
 
     .delbtn {
       display: inline-block;
+    }
+    header{
+      background:#eee;
     }
   </style>
 </head>
@@ -145,7 +148,7 @@
 
             <ul class="nav flex-column mb-auto">
               <li class="nav-item">
-                <a class="nav-link d-flex align-items-center gap-2" href="#">
+                <a class="nav-link d-flex align-items-center gap-2" href="index.html">
                   <span class="bi bi-door-closed-fill"> SIGN OUT</span>
                 </a>
               </li>
@@ -281,7 +284,7 @@
         </td>
       `;
           document.getElementById("tbody").append(tr);
-
+         
           let modal = document.createElement('div');
           modal.innerHTML = `
         <div class="modal fade" id="updateModal${record._id}" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
@@ -305,7 +308,7 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" onclick="updateDepartmentAdmin('${record._id}')">Save changes</button>
+                <button type="button" class="btn btn-primary" onclick="updateDepartmentAdmin('${record._id}')">Update</button>
               </div>
             </div>
           </div>
@@ -320,131 +323,6 @@
       });
   </script> 
 
-  <!-- <script>
-    function refreshPage() {
-      setTimeout(function () {
-        location.reload();
-      }, 100);
-    }
-
-    function updateDepartmentAdmin(id) {
-      let username = document.getElementById(`update-username-${id}`).value;
-      let password = document.getElementById(`update-password-${id}`).value;
-      let data = {
-        username: username,
-        password: password,
-      };
-
-      fetch(`http://localhost:9090/deptAdmin/update/${id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      })
-        .then((res) => {
-          if (res.status === 204) {
-            console.log('Record updated successfully');
-            window.location.href = 'adminDashboard.html';
-          } else if (res.status === 404) {
-            console.log('No matching record found');
-          } else {
-            console.error('Error updating record:', res.statusText);
-          }
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-        });
-    }
-
-    function confirmDelete(id) {
-      let deleteModal = new bootstrap.Modal(document.getElementById(`deleteModal${id}`));
-      deleteModal.show();
-    }
-
-    fetch("http://localhost:9090/admindashboard", {
-      method: "get",
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        for (let record of data) {
-          let tr = document.createElement("tr");
-          tr.innerHTML = `
-            <td>${record.department}</td>
-            <td>${record.username}</td>
-            <td>${record.password}</td>
-            <td>${record.email}</td>
-            <td>
-              <span>
-                <button
-                  class="editbtn btn btn-primary"
-                  data-bs-toggle="modal"
-                  data-bs-target="#updateModal${record._id}"
-                >
-                  <span class="bi bi-pencil-square"></span>
-                </button>
-                <a
-                  href="javascript:void(0)"
-                  onclick="confirmDelete('${record._id}')"
-                >
-                  <button
-                    class="btn btn-danger delbtn"
-                  >
-                    <span class="bi bi-trash"></span>
-                  </button>
-                </a>
-              </span>
-            </td>
-          `;
-          document.getElementById("tbody").append(tr);
-
-          let modal = document.createElement('div');
-          modal.innerHTML = `
-            <div class="modal fade" id="updateModal${record._id}" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
-             
-            </div>
-          `;
-
-          let deleteModal = document.createElement('div');
-          deleteModal.innerHTML = `
-            <div class="modal fade" id="deleteModal${record._id}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="deleteModalLabel">Confirm Delete</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    Are you sure you want to delete this department?
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                    <a
-                      href="http://localhost:9090/deptAdmin/delete/${record._id}"
-                    >
-                      <button
-                        class="btn btn-danger"
-                        onclick="refreshPage()"
-                      >
-                        Yes
-                      </button>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          `;
-
-          document.body.appendChild(modal);
-          document.body.appendChild(deleteModal);
-        }
-      })
-      .catch((error) => {
-        console.error('Error fetching data:', error);
-      });
-</script> -->
-
+  
 </body>
 </html>

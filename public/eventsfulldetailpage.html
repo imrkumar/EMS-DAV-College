@@ -1,58 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
-        
+
     </title>
     <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="CSS/style.css">
     <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-    <link rel="icon" href="images/logo.png">
+    <style>
+        .eventData {
+            width: 400px;
+        }
+
+        .eventData h1 {
+            color: #a24236;
+
+        }
+
+        .eventData span {
+            font-weight: 600;
+        }
+
+        p {
+            font-weight: lighter;
+        }
+
+        .flex-div {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 35px;
+            margin-bottom: 50px;
+        }
+
+        #moreEvent h1 {
+            color: #a24236;
+            text-align: center;
+        }
+        .card-text {
+            height: 30px;
+          
+        }
+        .moreEventFont{
+            font-weight: bold;
+          font-size: 19px;
+        }
+        .decoration{
+            text-decoration: none;
+        }
+        #moreEvent span{
+            display: inline-block;
+        }
+        .card {
+    display: inline-block;
+    border: 0px solid;
+    margin: -25px;
+        }
+        .eventContainer
+        {
+            overflow: hidden;
+        }
+    </style>
 </head>
+
 <body>
-    <!-- <header>
-        <nav class="nav-header">
-            <div class="logo-container"> <a href="index.html"><img src="images/logo.png" class="main-logo"></a></div>
-            <h1 class="long-heading"> DAV COLLEGE EVENT MANAGEMENT SYSTEM</h1>
-            <h1 class="short-heading">DEMS</h1>
-        </nav>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
-            <div class="container-fluid">
+    <header>
+        <nav class="navbar navbar-expand-lg ">
+            <div class="logo-container"> <a href="index.html"><img src="images/emsLogo.png" class="main-logo"
+                        style="object-fit: contain;"></a></div>
+
+
+            <div class="container-fluid" id="tabs">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
                     aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarText">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
+                        <li class="nav-item tabs-margin">
                             <a class="nav-link " aria-current="page" href="index.html">HOME</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item tabs-margin">
                             <a class="nav-link" href="/public/admin_login.html">ADMIN</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item tabs-margin">
                             <a class="nav-link" href="dept_login.html">DEPARTMENT LOGIN</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">CONTACT US</a>
+                        <li class="nav-item tabs-margin">
+                            <a class="nav-link" href="contact.html">CONTACT US</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item tabs-margin">
                             <a class="nav-link" href="aboutus.html">ABOUT US</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
-    </header> -->
+    </header>
 
-  <div id="main">
-    
-    <div>
-        
+    <div id="main">
+
+
+
     </div>
-  </div>
+    <div class="flex-div">
+        <div id="main2">
+
+
+
+        </div>
+        <div id="moreEvent">
+            <h1>More Events</h1>
+        </div>
+    </div>
     <div class="container" style="border-top: 2px solid whitesmoke;">
         <footer class="py-5">
             <div class="row">
@@ -105,15 +167,8 @@
                 </div>
 
                 <div class="col-md-5 offset-md-1 mb-3">
-                    <div style="display: flex;">
-                        <div>
-                            <img src="images/logo.png">
-                        </div>
-                        <div>
-                            <img src="images/footerlogoname.png">
-                        </div>
-                    </div>
-                    <div>
+
+                    <div class="footer-bg">
                         <p>
                             A premier educational institution of North India, DAV College Amritsar has high academic
                             standing and a reputation for excellence in research and teaching which is reflected in the
@@ -132,41 +187,104 @@
             <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
                 <p>Managed and Maintained By: PG Department of Computer Science and IT, DAV College, Amritsar, All
                     Rights Reserved. © 2023 Coded By : <a href="" class=""> Website Committee</a> </p>
-                <ul class="list-unstyled d-flex">
-                    <li class="ms-3"><a class="link-body-emphasis" href="#"><svg class="bi" width="24" height="24">
-                                <use xlink:href="#twitter"></use>
-                            </svg></a></li>
-                    <li class="ms-3"><a class="link-body-emphasis" href="#"><svg class="bi" width="24" height="24">
-                                <use xlink:href="#instagram"></use>
-                            </svg></a></li>
-                    <li class="ms-3"><a class="link-body-emphasis" href="#"><svg class="bi" width="24" height="24">
-                                <use xlink:href="#facebook"></use>
-                            </svg></a></li>
-                </ul>
+
             </div>
         </footer>
     </div>
 
 
     <script>
-        const url=new URL(window.location.href);
+        const url = new URL(window.location.href);
         const documentId = url.searchParams.get('id');
         console.log(documentId)
-        fetch(`http://localhost:9090/event/${documentId}`,{
+        fetch(`http://localhost:9090/event/${documentId}`, {
             method: "GET"
         })
-        .then(res=>res.json())
-        
-        .then((data)=>{
-            console.log(data)
-            let div = document.createElement('div')
-            div.innerHTML =
+            .then(res => res.json())
+
+            .then((data) => {
+                console.log(data)
+                let div = document.createElement('div')
+
+                div.innerHTML =
+                    `
+            <div class="p-2"><img src='${data[0].eventBanner}' height="fit-content"; width="100%"/></div>
+           
+                
+               
+                
+           
             `
-            <img src='${data[0].eventBanner}'/>
-            <p>${data[0].eventReport}</p>
-            `
-             document.getElementById('main').append(div)
+                document.getElementById('main').append(div)
+            })
+        const url2 = new URL(window.location.href);
+        const documentIds = url.searchParams.get('id');
+        console.log(documentId)
+        fetch(`http://localhost:9090/event/${documentIds}`, {
+            method: "GET"
         })
+            .then(res => res.json())
+
+            .then((data) => {
+                console.log(data)
+                let div = document.createElement('div')
+
+                div.innerHTML =
+                    `
+           
+           
+                <div class="eventData">
+                <h1>${data[0].eventName}</h1>
+                <p><span>EVENT DATE : </span>${data[0].eventDate}</p>
+                <p> <span>EVENT INCHARGE : </span>${data[0].resourcePerson}</p>
+                <h1>About this Event </h1>
+                <p>${data[0].eventReport} </p>
+                </div>
+               
+                
+           
+            `
+                document.getElementById('main2').append(div)
+            })
+
+        const datacon1 = document.getElementById('moreEvent');
+        fetch("http://localhost:9090/getEventData", {
+            method: "get",
+        }).then((res) => {
+            return res.json()
+        }).then((data) => {
+
+            data.sort((a, b) => new Date(b.eventDate) - new Date(a.eventDate));
+
+            for (let item = 0; item < 3; item++) {
+                let div = document.createElement('div')
+                div.className="eventContainer";
+                div.innerHTML = `
+                <a href="eventsfulldetailpage.html?id=${data[item]._id}" class="decoration">
+                   
+                  <span><img src="images/icon.jpg" height="197px"/></span>
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <p class="card-text moreEventFont "  style="margin-bottom:0px">
+                         ${data[item].eventName} 
+                    </p> 
+                           
+                    <p class="card-text " >
+                         ${data[item].eventDate} 
+                    </p> 
+                    <p class="card-text " style="margin-top:-8px; color:#a24236">
+                        ... Read more
+                    </p>  
+                        </div>
+                    </div>
+                  
+            <a/>
+       `;
+                datacon1.append(div);
+            }
+        });
+
     </script>
 </body>
+
 </html>
