@@ -33,6 +33,7 @@
   margin: 22px;
   border: 3px solid whitesmoke;
  
+ 
 }
 .card-text{
   font-weight: lighter;
@@ -177,7 +178,7 @@
     
 }
 }
-@media screen and (max-width: 1271px){
+@media screen and (max-width: 1275px){
 #tabs {
 
     margin-left: -718px;
@@ -253,6 +254,17 @@ body{
   background-position: center;
   background-size: contain;
 }
+.card-text{
+  color: black;
+}
 .card-text p{
   font-weight: lighter;
+  
+}
+
+.fw-bold{
+  color: black;
+}
+#registrationLink{
+  text-decoration: none;
 }

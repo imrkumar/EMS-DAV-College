@@ -11,6 +11,7 @@ let jwt = require("jsonwebtoken");
 require("dotenv").config();
 let port = process.env.PORT || 9090;
 const { ObjectId } = require("mongodb");
+const { event } = require("jquery");
 app.use(bodyParser.json());
 app.use(cors());
 
@@ -258,13 +259,16 @@ app.post("/department/activity", upload.fields([
     let data = {
       departent : req.body.departent,
       eventDate: req.body.eventDate,
+      eventTime:req.body.eventTime,
       eventNotice: req.files["eventNotice"][0].path,
       eventBanner: req.files["eventBanner"][0].path,
       eventName: req.body.eventName,
+      eventVenue: req.body.eventVenue,
       resourcePerson: req.body.resourcePerson,
       briefIntro: req.body.briefIntro,
 
       eventReport: req.body.eventReport,
+      eventRegistration:req.body.eventRegistration 
       // attendance: req.files["attendance"][0].path,
       // eventPic: req.files["eventPic"].map((file) => file.path),
       // mediaCoverage: req.files["mediaCoverage"].map((file) => file.path),
