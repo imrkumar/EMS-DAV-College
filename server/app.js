@@ -265,9 +265,9 @@ app.post("/department/activity", upload.fields([
       briefIntro: req.body.briefIntro,
 
       eventReport: req.body.eventReport,
-      attendance: req.files["attendance"][0].path,
-      eventPic: req.files["eventPic"].map((file) => file.path),
-      mediaCoverage: req.files["mediaCoverage"].map((file) => file.path),
+      // attendance: req.files["attendance"][0].path,
+      // eventPic: req.files["eventPic"].map((file) => file.path),
+      // mediaCoverage: req.files["mediaCoverage"].map((file) => file.path),
     };
     mongoClient.connect(connectionString, (err, clientObject) => {
       if (!err) {
@@ -283,7 +283,7 @@ app.post("/department/activity", upload.fields([
 
     res.send("data received successfully");
   }
-);uuuuu
+);
 
 /**
  * consume api data
