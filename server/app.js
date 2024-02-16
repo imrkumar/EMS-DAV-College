@@ -201,6 +201,7 @@ app.post('/department/login', (req, res) => {
   mongoClient.connect(connectionString, (err, clientObject) => {
     if (!err) {
       const dbo = clientObject.db('DavEms');
+      
       dbo.collection('DeptAdmin').find({ department: department }).toArray((err, documents) => {
         if (!err) {
           if (
@@ -255,6 +256,7 @@ app.post("/department/activity", upload.fields([
   ]),
   (req, res) => {
     let data = {
+      departent : req.body.departent,
       eventDate: req.body.eventDate,
       eventNotice: req.files["eventNotice"][0].path,
       eventBanner: req.files["eventBanner"][0].path,
@@ -281,7 +283,7 @@ app.post("/department/activity", upload.fields([
 
     res.send("data received successfully");
   }
-);
+);uuuuu
 
 /**
  * consume api data
@@ -436,3 +438,45 @@ app.listen(port, (err) => {
     console.log("Server is running on port " + port);
   }
 });
+
+
+
+//update code
+
+// app.post("/department/activity", upload.fields([
+//   { name: "eventNotice", maxCount: 1 },
+//   { name: "eventBanner", maxCount: 1 },
+//   { name: "attendance", maxCount: 1 },
+//   { name: "eventPic", maxCount: 10 },
+//   { name: "mediaCoverage", maxCount: 10 },
+// ]),
+// (req, res) => {
+//   let data = {
+//     departent : req.body.departent,
+//     eventDate: req.body.eventDate,
+//     eventNotice: req.files["eventNotice"][0].path,
+//     eventBanner: req.files["eventBanner"][0].path,
+//     eventName: req.body.eventName,
+//     resourcePerson: req.body.resourcePerson,
+//     briefIntro: req.body.briefIntro,
+
+//     eventReport: req.body.eventReport,
+//     attendance: req.files["attendance"][0].path,
+//     eventPic: req.files["eventPic"].map((file) => file.path),
+//     mediaCoverage: req.files["mediaCoverage"].map((file) => file.path),
+//   };
+//   mongoClient.connect(connectionString, (err, clientObject) => {
+//     if (!err) {
+//       let dbo = clientObject.db("DavEms");
+//       dbo.collection("DeptActivity").insertOne(data, (err, result) => {
+//         if (!err) {
+//           console.log("record inserted");
+//         }
+//       });
+//     }
+//   });
+//   console.log(req.body, req.file);
+
+//   res.send("data received successfully");
+// }
+// );
