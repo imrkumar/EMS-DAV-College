@@ -148,8 +148,8 @@
 
             <ul class="nav flex-column mb-auto">
               <li class="nav-item">
-                <a class="nav-link d-flex align-items-center gap-2" href="index.html">
-                  <span class="bi bi-door-closed-fill"> SIGN OUT</span>
+                <a class="nav-link d-flex align-items-center gap-2" >
+                  <span class="bi bi-door-closed-fill" id="logout-button"> SIGN OUT</span>
                 </a>
               </li>
             </ul>
@@ -321,6 +321,39 @@
       .catch((error) => {
         console.error('Error fetching data:', error);
       });
+      
+
+      
+
+
+    // Add a logout button
+const logoutButton = document.getElementById('logout-button');
+
+logoutButton.addEventListener('click', function() {
+    // Remove username from session storage
+    sessionStorage.removeItem('username');
+
+    // Redirect to the login page or perform other logout actions
+    location.href = "index.html";
+});
+
+
+// function isUsernameAvailable() {
+//     const storedUsername = sessionStorage.getItem('username');
+//     console.log(storedUsername)
+//     return storedUsername !== null && storedUsername !== undefined;
+// }
+
+// // Example usage
+// if (isUsernameAvailable()) {
+//     location.href="adminDashboard.html"
+//     // Perform actions for an available username
+// } else {
+//   location.href="admin_login.html"
+//     // Perform actions for an unavailable username
+// }
+
+
   </script> 
 
   
