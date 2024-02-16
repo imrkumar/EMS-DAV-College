@@ -31,6 +31,8 @@
     <form class="border border-dark p-lg-5 rounded-3" id="Data" enctype="multipart/form-data">
       <h2 class="mb-4" style="text-align: center;">ADD DEPARTMENT ACTIVITY</h2>
       <dl>
+        <dt><label class="form-label" for="department">Department</label></dt>
+        <dd><input type="text" class="form-control" id="department" name="department" readonly></dd>
         <dt><label class="form-label" for="eventDate">EVENT DATE</label></dt>
         <dd><input type="date" class="form-control" id="eventDate" name="eventDate" ></dd>
         <dt><label class="form-label" for="eventNotice">EVENT NOTICE</label></dt>
@@ -43,16 +45,16 @@
         <dd><input type="text" class="form-control" id="resourcePerson" name="resourcePerson" > </dd>
         <dt><label class="form-label" for="briefIntro">BRIEF INTRODUCTION ABOUT RESOURCE PERSON</label></dt>
         <dd><textarea class="form-control" id="briefIntro" name="briefIntro" ></textarea></dd>
-        <dt><label class="form-label" for="eventReport"> INTRODUCTION ABOUT EVENT </label></dt>
+        <dt><label class="form-label" for="eventReport"> EVENT REPORT </label></dt>
         <dd><textarea class="form-control " id="eventReport" name="eventReport" ></textarea></dd>
-        <dt><label class="form-label" for="attendance">ATTENDANCE PROOF</label></dt>
+        <!-- <dt><label class="form-label" for="attendance">ATTENDANCE PROOF</label></dt>
         <dd><input type="file" class="form-control" id="attendance" name="attendance" ></dd>
         <dt><label class="form-label" for="eventPic">EVENT PICTURE</label></dt>
         <dd id="inputpicContainer"><input type="file" class="form-control" id="eventPic" name="eventPic" ></dd>
         <dd><button id="addInputpicButton" class="btn btn-success">Add More</button></dd>
         <dt><label class="form-label" for="mediaCoverage">MEDIA COVERAGE</label></dt>
         <dd id="inputContainer" ><input type="file" class="form-control" id="mediaCoverage" name="mediaCoverage" ></dd>
-        <dd><button id="addInputButton" class="btn btn-success">Add More</button></dd>
+        <dd><button id="addInputButton" class="btn btn-success">Add More</button></dd>  -->
 
       </dl>
       <div class="text-center mt-4">
@@ -92,35 +94,44 @@
       }
     });
     
-    document.getElementById('addInputButton').addEventListener('click', function(e) {
-      e.preventDefault();
-            // Create a new input element
-            const newInput = document.createElement('input');
+    // document.getElementById('addInputButton').addEventListener('click', function(e) {
+    //   e.preventDefault();
+    //         // Create a new input element
+    //         const newInput = document.createElement('input');
 
-            // Set attributes for the new input (e.g., type, placeholder, name, etc.)
-            newInput.type = 'file';
-            newInput.name = 'mediaCoverage';
-            newInput.className="form-control";
-            newInput.id="mediaCoverage";
+    //         // Set attributes for the new input (e.g., type, placeholder, name, etc.)
+    //         newInput.type = 'file';
+    //         newInput.name = 'mediaCoverage';
+    //         newInput.className="form-control";
+    //         newInput.id="mediaCoverage";
 
-            // Append the new input to the container
-            document.getElementById('inputContainer').appendChild(newInput);
-        });
-    document.getElementById('addInputpicButton').addEventListener('click', function(e) {
-      e.preventDefault();
-            // Create a new input element
-            const newInput = document.createElement('input');
+    //         // Append the new input to the container
+    //         document.getElementById('inputContainer').appendChild(newInput);
+    //     });
+    // document.getElementById('addInputpicButton').addEventListener('click', function(e) {
+    //   e.preventDefault();
+    //         // Create a new input element
+    //         const newInput = document.createElement('input');
 
-            // Set attributes for the new input (e.g., type, placeholder, name, etc.)
-            newInput.type = 'file';
-            newInput.name = 'eventPic';
-            newInput.className="form-control";
-            newInput.id="eventPic";
+    //         // Set attributes for the new input (e.g., type, placeholder, name, etc.)
+    //         newInput.type = 'file';
+    //         newInput.name = 'eventPic';
+    //         newInput.className="form-control";
+    //         newInput.id="eventPic";
 
-            // Append the new input to the container
-            document.getElementById('inputpicContainer').appendChild(newInput);
-        });
+    //         // Append the new input to the container
+    //         document.getElementById('inputpicContainer').appendChild(newInput);
+    //     });
 
+        document.addEventListener('DOMContentLoaded', function () {
+        const storeDepartment = sessionStorage.getItem('department');
+
+        if (storeDepartment) {
+            // Display the username on the page
+            document.getElementById('department').value = storeDepartment;
+        }
+        console.log(storeDepartment)
+    });
   </script>
 </body>
 

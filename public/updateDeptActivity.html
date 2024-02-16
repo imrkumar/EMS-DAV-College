@@ -1,49 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
 
-    </title>
-    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="/node_modules/bootstrap-icons/font/bootstrap-icons.css"/>
-    <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-    <link rel="icon" href="images/logo.png">
-    <style>
-        #container {
-              width: 890px;
-              height: 100vh;
-              margin-top: 10px;
-           }
-          form{
-              border: 1px solid;
-              padding: 20px;    
-          }
-         
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+
+  </title>
+  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/node_modules/bootstrap-icons/font/bootstrap-icons.css" />
+  <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <link rel="icon" href="images/logo.png">
+  <style>
+    #container {
+      width: 890px;
+      height: 100vh;
+      margin-top: 10px;
+    }
+
+    form {
+      border: 1px solid;
+      padding: 20px;
+    }
   </style>
 </head>
+
 <body>
+
   <div class="container-fluid" id="container">
-      <form class="border border-dark p-lg-5 rounded-3" id="Data"  >
-          <h2 class="mb-4" style="text-align: center;">UPDATE DEPARTMENT ACTIVITY</h2>
-          <dl>
-              <dt><label class="form-label" for="Username">EVENT DATE</label></dt>
-              <dd><input type="date" class="form-control" id="username" name="username"></dd>
-              <dt><label class="form-label" for="Username">EVENT NOTICE</label></dt>
-              <dd><input type="file" class="form-control" ></dd>
-              <dt><label class="form-label" for="Username">EVENT BANNER</label></dt>
-              <dd><input type="file" class="form-control" ></dd>
-              <dt><label class="form-label" for="Username">EVENT NAME</label></dt>
-              <dd><input type="text" class="form-control" ></dd>
-              <dt><label class="form-label" for="Username">NAME OF THE RESOURCE PERSON</label></dt>
-              <dd><input type="text" class="form-control" ></dd>
-             
-          </dl>
-          <div class="text-center mt-4">
-              <button id="submit"  class="btn btn bg-success  text-white ">SUBMIT</button></div>
-      </form>
-      
-     </div> 
+    <form class="border border-dark p-lg-5 rounded-3" id="Data" enctype="multipart/form-data">
+      <h2 class="mb-4" style="text-align: center;">ADD DEPARTMENT ACTIVITY</h2>
+      <dl>
+        <dt><label class="form-label" for="department">Department</label></dt>
+        <dd><input type="text" class="form-control" id="department" name="department" readonly></dd>
+        <dt><label class="form-label" for="eventDate">EVENT DATE</label></dt>
+        <dd><input type="date" class="form-control" id="eventDate" name="eventDate" ></dd>
+        <dt><label class="form-label" for="eventNotice">EVENT NOTICE</label></dt>
+        <dd><input type="file" class="form-control" id="eventNotice" name="eventNotice" ></dd>
+        <dt><label class="form-label" for="eventBanner">EVENT BANNER</label></dt>
+        <dd><input type="file" class="form-control" id="eventBanner" name="eventBanner" ></dd>
+        <dt><label class="form-label" for="eventName">EVENT NAME</label></dt>
+        <dd><input type="text" class="form-control" id="eventName" name="eventName" ></dd>
+        <dt><label class="form-label" for="resourcePerson">NAME OF THE RESOURCE PERSON</label></dt>
+        <dd><input type="text" class="form-control" id="resourcePerson" name="resourcePerson" > </dd>
+        <dt><label class="form-label" for="briefIntro">BRIEF INTRODUCTION ABOUT RESOURCE PERSON</label></dt>
+        <dd><textarea class="form-control" id="briefIntro" name="briefIntro" ></textarea></dd>
+        <dt><label class="form-label" for="eventReport"> INTRODUCTION ABOUT EVENT </label></dt>
+        <dd><textarea class="form-control " id="eventReport" name="eventReport" ></textarea></dd>
+        <dt><label class="form-label" for="attendance">ATTENDANCE PROOF</label></dt>
+        <dd><input type="file" class="form-control" id="attendance" name="attendance" ></dd>
+        <dt><label class="form-label" for="eventPic">EVENT PICTURE</label></dt>
+        <dd id="inputpicContainer"><input type="file" class="form-control" id="eventPic" name="eventPic" ></dd>
+        <dd><button id="addInputpicButton" class="btn btn-success">Add More</button></dd>
+        <dt><label class="form-label" for="mediaCoverage">MEDIA COVERAGE</label></dt>
+        <dd id="inputContainer" ><input type="file" class="form-control" id="mediaCoverage" name="mediaCoverage" ></dd>
+        <dd><button id="addInputButton" class="btn btn-success">Add More</button></dd>
+
+      </dl>
+      <div class="text-center mt-4">
+        <button id="submit" class="btn btn bg-success  text-white ">SUBMIT</button>
+      </div>
+    </form>
+
+  </div>
+  
 </body>
 </html>

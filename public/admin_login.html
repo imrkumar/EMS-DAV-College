@@ -34,7 +34,7 @@
         <form class="border border-dark p-lg-5 rounded-3" id="Data">
             <h2 class="mb-4">Admin Login</h2>
             <dl>
-                <dt><label class="form-label" for="Username">Username</label></dt>
+                <dt><label class="form-label" for="username">Username</label></dt>
                 <dd><input type="text" class="form-control" id="username" name="username"></dd>
                 <dt><label class="form-label" for="password">Password</label></dt>
                 <dd><input type="password" class="form-control" name="password" id="password"></dd>
@@ -67,18 +67,23 @@
             })
                 .then((res) => {
                     if (res.status == 200) {
-                        location.href = "../public/adminDashboard.html"
-                    } else if (res.status === 401) {
-                        // Handle unauthorized (401) response
-                        res.json().then(data => {
-                          let msg =  document.getElementById("message").innerHTML = data.message;
-                          
-                        }).catch(error => {
-                            console.error('Error parsing JSON:', error);
-                        });
-                    }
+                // Save username to session storage after successful login
+                const storagevalue=document.getElementById("username").value;
+                sessionStorage.setItem('username',  storagevalue);
+                
+                console.log(sessionStorage)
+                // Redirect to the dashboard
+                location.href = "adminDashboard.html";
+            } else if (res.status === 401) {
+                res.json().then(data => {
+                    let msg =  document.getElementById("message").innerHTML = data.message;
+                }).catch(error => {
+                    console.error('Error parsing JSON:', error);
+                });
+            }
                 })
         })
+
     </script>
 </body>
 

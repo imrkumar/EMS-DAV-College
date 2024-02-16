@@ -90,7 +90,8 @@
                             <a class="nav-link" href="/public/admin_login.html">ADMIN</a>
                         </li>
                         <li class="nav-item tabs-margin">
-                            <a class="nav-link" href="dept_login.html">DEPARTMENT LOGIN</a>
+                            <a class="nav-link" href="dept_login.html"
+                            style="border-bottom: 2px solid #a24236;">DEPARTMENT LOGIN</a>
                         </li>
                         <li class="nav-item tabs-margin">
                             <a class="nav-link" href="contact.html">CONTACT US</a>
@@ -103,23 +104,36 @@
             </div>
         </nav>
     </header>
-    <h2 class="mb-4" id="deptnamehead">WELCOME TO <span></span></h2>
+    <h2 class="mb-4" id="deptnamehead">WELCOME TO <span id="department"></span></h2>
     <div class="card ">
         <div class="card-body" style="height: auto;">
 
             <p class="card-text">Add Department Activity
                 <a href="addDeptActivity.html" class="card-link bi bi-file-earmark-plus-fill " id="marginset"></a>
             </p>
-            <p class="card-text">Update Department Activity
+            <!-- <p class="card-text">Update Department Activity
                 <a href="updateDeptActivity.html" class="card-link bi bi-arrow-clockwise" id="marginset2"></a>
-            </p>
+            </p> -->
             <p class="card-text">View Department Activity
-                <a href="#" class="card-link bi bi-eye-fill" id="marginset3"></a>
+                <a href="viewDeptActivity.html" class="card-link bi bi-eye-fill" id="marginset3"></a>
             </p>
         </div>
     </div>
+
+
+
+
+
  <script>
-    
+     document.addEventListener('DOMContentLoaded', function () {
+        const storeDepartment = sessionStorage.getItem('department');
+
+        if (storeDepartment) {
+            // Display the username on the page
+            document.getElementById('department').innerText = storeDepartment;
+        }
+    });
+
  </script>
 </body>
 

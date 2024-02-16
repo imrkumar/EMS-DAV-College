@@ -99,17 +99,31 @@
                 body: payload,
             })
                 .then((res) => {
-                    if (res.status == 200) {
-                        location.href = "deptDashboard.html";
-                    } else if (res.status === 401) {
-                        // Handle unauthorized (401) response
-                        res.json().then(data => {
-                          let msg =  document.getElementById("message").innerHTML = data.message;
+                    // if (res.status == 200) {
+                    //     location.href = "deptDashboard.html";
+                    // } else if (res.status === 401) {
+                    
+                    //     res.json().then(data => {
+                    //       let msg =  document.getElementById("message").innerHTML = data.message;
                           
-                        }).catch(error => {
-                            console.error('Error parsing JSON:', error);
-                        });
-                    }
+                    //     }).catch(error => {
+                    //         console.error('Error parsing JSON:', error);
+                    //     });
+                    // }
+                    if (res.status == 200) {
+                // Save username to session storage after successful login
+                sessionStorage.setItem('username', username);
+                sessionStorage.setItem('department', department);
+                
+                // Redirect to the dashboard
+                location.href = "deptDashboard.html";
+            } else if (res.status === 401) {
+                res.json().then(data => {
+                    let msg =  document.getElementById("message").innerHTML = data.message;
+                }).catch(error => {
+                    console.error('Error parsing JSON:', error);
+                });
+            }
                    
                 })
         })
