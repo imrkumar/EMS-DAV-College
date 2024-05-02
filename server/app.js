@@ -5,8 +5,8 @@ let multer = require("multer");
 let mongoClient = require("mongodb").MongoClient;
 let bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
-// let connectionString = "mongodb://127.0.0.1:27017";
-let connectionString = "mongodb+srv://rahulkumar:rk@cluster0.ozruczv.mongodb.net/";
+//  let connectionString = "mongodb://127.0.0.1:27017";
+   let connectionString = "mongodb+srv://rahulkumar:rk@cluster0.ozruczv.mongodb.net/";
 let path = require('path');
 let jwt = require("jsonwebtoken");
 require("dotenv").config();
@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 const secret_key = "admin";
-
+ 
 /**
  * @route /
  * @description "This is default route"
@@ -25,7 +25,7 @@ const secret_key = "admin";
  * @params N/A
  * @return_Type JSON Object
  *
- */
+ */ 
 app.get("/", (req, res) => {
   res.send({
     about: "This is Event management of DAV College.",

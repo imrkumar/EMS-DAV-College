@@ -29,11 +29,10 @@
   justify-content: center;
 }
 .card {
-  width: 350px;
+  width: 330px;
   margin: 22px;
   border: 3px solid whitesmoke;
- 
- 
+  margin-left: 12px;
 }
 .card-text{
   font-weight: lighter;
@@ -173,7 +172,7 @@
 @media screen and (max-width: 1488px){
 #tabs {
 
-    margin-left: -437px;
+    margin-left: -450px;
     margin-top: -8px;
     
 }
@@ -181,7 +180,7 @@
 @media screen and (max-width: 1275px){
 #tabs {
 
-    margin-left: -718px;
+    margin-left: -732px;
     margin-top: -8px;
    
 }
@@ -189,7 +188,7 @@
 @media screen and (max-width: 1136px){
   #tabs {
     
-    margin-left: -1064px;
+    margin-left: -1082px;
     margin-top: -8px;
   
 }
