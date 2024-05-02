@@ -5,8 +5,13 @@ let multer = require("multer");
 let mongoClient = require("mongodb").MongoClient;
 let bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
+<<<<<<< HEAD
 //  let connectionString = "mongodb://127.0.0.1:27017";
    let connectionString = "mongodb+srv://rahulkumar:rk@cluster0.ozruczv.mongodb.net/";
+=======
+let connectionString = "mongodb://127.0.0.1:27017";
+// let connectionString = "mongodb+srv://rahulkumar:rk@cluster0.ozruczv.mongodb.net/";
+>>>>>>> 7d1ce012680f82f8acad293470545551bd3fa01f
 let path = require('path');
 let jwt = require("jsonwebtoken");
 require("dotenv").config();
@@ -258,7 +263,7 @@ app.post("/department/activity", upload.fields([
   ]),
   (req, res) => {
     let data = {
-      departent : req.body.departent,
+      department : req.body.department,
       eventDate: req.body.eventDate,
       eventTime:req.body.eventTime,
       eventNotice: req.files["eventNotice"][0].path,
@@ -431,6 +436,38 @@ app.get('/event/:id',(req,res)=>{
   });
 })
 
+/**
+ * @route /event/:department
+ * @description "This route is use to get single event details based on id"
+ * @method GET
+ * @params N/A
+ * @return_Type JSON Object
+ *
+ */
+app.get('/getEventData/:department', (req, res) => {
+  const department = req.params.department; // Corrected extraction
+
+  mongoClient.connect(connectionString, (err, clientObject) => {
+    if (!err) {
+      let dbo = clientObject.db("DavEms");
+      dbo
+        .collection("DeptActivity")
+        .find({ department: department }) // Use the extracted department
+        .toArray((err, documents) => {
+          if (!err) {
+            res.send(documents);
+          } else {
+            res.status(500).send("Error fetching data");
+          }
+          // Close the connection
+          clientObject.close();
+        });
+    } else {
+      res.status(500).send("Error connecting to database");
+    }
+  });
+});
+
 
 /**
  * @server : server is running on port(value)
@@ -446,42 +483,42 @@ app.listen(port, (err) => {
 
 
 
-//update code
+// update code
 
-// app.post("/department/activity", upload.fields([
-//   { name: "eventNotice", maxCount: 1 },
-//   { name: "eventBanner", maxCount: 1 },
-//   { name: "attendance", maxCount: 1 },
-//   { name: "eventPic", maxCount: 10 },
-//   { name: "mediaCoverage", maxCount: 10 },
-// ]),
-// (req, res) => {
-//   let data = {
-//     departent : req.body.departent,
-//     eventDate: req.body.eventDate,
-//     eventNotice: req.files["eventNotice"][0].path,
-//     eventBanner: req.files["eventBanner"][0].path,
-//     eventName: req.body.eventName,
-//     resourcePerson: req.body.resourcePerson,
-//     briefIntro: req.body.briefIntro,
+app.put("/department/activity/update/:id", upload.fields([
+  { name: "eventNotice", maxCount: 1 },
+  { name: "eventBanner", maxCount: 1 },
+  { name: "attendance", maxCount: 1 },
+  { name: "eventPic", maxCount: 10 },
+  { name: "mediaCoverage", maxCount: 10 },
+]),
+(req, res) => {
+  let data = {
+    departent : req.body.departent,
+    eventDate: req.body.eventDate,
+    eventNotice: req.files["eventNotice"][0].path,
+    eventBanner: req.files["eventBanner"][0].path,
+    eventName: req.body.eventName,
+    resourcePerson: req.body.resourcePerson,
+    briefIntro: req.body.briefIntro,
 
-//     eventReport: req.body.eventReport,
-//     attendance: req.files["attendance"][0].path,
-//     eventPic: req.files["eventPic"].map((file) => file.path),
-//     mediaCoverage: req.files["mediaCoverage"].map((file) => file.path),
-//   };
-//   mongoClient.connect(connectionString, (err, clientObject) => {
-//     if (!err) {
-//       let dbo = clientObject.db("DavEms");
-//       dbo.collection("DeptActivity").insertOne(data, (err, result) => {
-//         if (!err) {
-//           console.log("record inserted");
-//         }
-//       });
-//     }
-//   });
-//   console.log(req.body, req.file);
+    eventReport: req.body.eventReport,
+    attendance: req.files["attendance"][0].path,
+    eventPic: req.files["eventPic"].map((file) => file.path),
+    mediaCoverage: req.files["mediaCoverage"].map((file) => file.path),
+  };
+  mongoClient.connect(connectionString, (err, clientObject) => {
+    if (!err) {
+      let dbo = clientObject.db("DavEms");
+      dbo.collection("DeptActivity").updateOne( {_id: ObjectId(id) }, { $set: data }, (err, result) => {
+        if (!err) {
+          console.log("record updated successfully");
+        }
+      });
+    }
+  });
+  console.log(req.body, req.file);
 
-//   res.send("data received successfully");
-// }
-// );
+  res.send("data received successfully");
+}
+);
