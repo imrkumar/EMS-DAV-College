@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Department-wise Events</title>
+    <style>
+        /* Basic CSS for styling */
+        .event-card {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body onload="loadDepartment()">
+    <div>
+        <select id="dept" required onchange="loadDepartmentData()">
+            <option value="">Select Department</option>
+        </select>
+    </div>
+    <div id="events-container">
+        <!-- Event cards will be dynamically populated here -->
+    </div>
+
+    <script>
+        function loadDepartment() {
+            fetch("http://localhost:9090/department", {
+                method: "GET",
+            })
+            .then(response => response.json())
+            .then(data => {
+                const deptSelect = document.getElementById("dept");
+                data.forEach(item => {
+                    var option = document.createElement("option");
+                    option.value = item.department;
+                    option.textContent = item.department;
+                    deptSelect.appendChild(option);
+                });
+            });
+        }
+
+        function loadDepartmentData() {
+            const selectedDepartment = document.getElementById("dept").value;
+            fetch(`http://localhost:9090/getEventData/${selectedDepartment}`, {
+                method: "GET",
+            })
+            .then(response => response.json())
+            .then(events => {
+                const eventsContainer = document.getElementById('events-container');
+                eventsContainer.innerHTML = ''; // Clear previous content
+                events.forEach(event => {
+                    const eventCard = document.createElement('div');
+                    eventCard.classList.add('event-card');
+                    eventCard.innerHTML = `
+                        <h2>${event.eventName}</h2>
+                        <p>Date: ${event.eventDate}</p>
+                        <!-- Add more event details here -->
+                    `;
+                    // Add click event listener to redirect to update form
+                    eventCard.addEventListener('click', () => redirectToUpdateForm(event._id));
+                    eventsContainer.appendChild(eventCard);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching event data:', error);
+                // Handle error if necessary
+            });
+        }
+
+        // Function to redirect to the update form page with event ID parameter
+        function redirectToUpdateForm(eventId) {
+            window.location.href = `./updateDeptActivity.html/${eventId}`;
+        }
+    </script>
+</body>
+</html>

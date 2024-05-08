@@ -3,45 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        
-    </title>
+    <title>Department Data</title>
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" />
+   
+    <link rel="stylesheet" href="CSS/style.css">
+    <style>
+        .decoration {
+            text-decoration: none;    
+        }
+    </style>
 </head>
 <body onload="loadDepartment()">
     <div>
-        <select class="form-select" id="dept" required>
-            <option>Select Department</option>
+        <select  id="dept" required onchange="loadDepartmentData()">
+            <option value="">Select Department</option>
         </select>
     </div>
-    <div class="main" id="updateEvent">
+    <div class="main" id="viewFullData">
 
     </div>
     <script>
         function loadDepartment() {
             fetch("http://localhost:9090/department", {
                 method: "GET",
-
-            }).then((response) => {
-
-                return response.json()
-            }).then((data) => {
-
-                for (item of data) {
-                    var option = document.createElement("option")
-                    option.id = "department"
-                    option.value = item.department
-
-                    option.text = item.department
-
-                    document.getElementById("dept").append(option)
-                }  
             })
-            
-             
-
-
-
+            .then((response) => response.json())
+            .then((data) => {
+                const deptSelect = document.getElementById("dept");
+                data.forEach((item) => {
+                    var option = document.createElement("option")
+                    option.value = item.department;
+                    option.textContent = item.department;
+                    deptSelect.appendChild(option);
+                });
+            });
         }
+
+        function loadDepartmentData() {
+    const selectedDept = document.getElementById("dept").value;
+    if(selectedDept) {
+        fetch(`http://localhost:9090/getEventData/${selectedDept}`, {
+            method: "GET",
+        })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then((data) => {
+            const viewFullData = document.getElementById("viewFullData");
+            let html = '';
+            data.forEach((event) => {
+                html += `
+                    <a href="EventAllDetails.html?id=${event._id}" class="decoration">
+                        <div class="card">
+                            <div class="card-header">
+                                <img src="${event.eventBanner}" width="100%">
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text text-center fw-bold" style="color:#a24236; font-size:22px;">
+                                    ${event.eventName}
+                                </p>
+                                <p class="card-text">
+                                    <span class="fw-bold badge-secondary">Event Incharge :</span> ${event.resourcePerson}
+                                </p>
+                                <p class="card-text">
+                                    <span class="fw-bold">Event Date :</span> ${event.eventDate}
+                                </p>
+                                <button class="btn btn-success" style="position:absolute; right:25px;">FULL DATA</button>
+                            </div>
+                        </div>
+                    </a>
+                `;
+            });
+            viewFullData.innerHTML = html;
+        })
+        .catch((error) => {
+            console.error('Error fetching department data:', error);
+            
+        });
+    } else {
+        const viewFullData = document.getElementById("viewFullData");
+        viewFullData.innerHTML = ''; 
+    }
+}
+
     </script>
+     <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
 </html>

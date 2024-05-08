@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+
+    </title>
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="CSS/style.css">
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <style>
+        .eventData {
+            width: 400px;
+        }
+
+        .eventData h1 {
+            color: #a24236;
+
+        }
+
+        .eventData span {
+            font-weight: 600;
+        }
+
+        p {
+            font-weight: lighter;
+        }
+
+        .flex-div {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 35px;
+            margin-bottom: 50px;
+        }
+
+        #moreEvent h1 {
+            color: #a24236;
+            text-align: center;
+        }
+        .card-text {
+            height: 30px;
+          
+        }
+        .moreEventFont{
+            font-weight: bold;
+          font-size: 19px;
+        }
+        .decoration{
+            text-decoration: none;
+        }
+        #moreEvent span{
+            display: inline-block;
+        }
+        .card {
+    display: inline-block;
+    border: 0px solid;
+    margin: -25px;
+        }
+        .eventContainer
+        {
+            overflow: hidden;
+        }
+        .padding{
+            padding: 2.5rem !important;
+        }
+    </style>
+</head>
+
+<body>
+   
+
+    
+  
+        <div id="fulleventdataCon">
+
+
+
+        </div>
+     
+    
+ 
+
+
+    <script>
+        const url = new URL(window.location.href);
+        const documentId = url.searchParams.get('id');
+        console.log(documentId)
+        fetch(`http://localhost:9090/event/${documentId}`, {
+            method: "GET"
+        })
+            .then(res => res.json())
+
+            .then((data) => {
+                console.log(data)
+                let div = document.createElement('div')
+                div.className = 'row';
+                div.innerHTML =
+                    `
+                  
+
+           
+                        <div class="col-12">
+                <div class="img-container">
+                    <img src="${data[0].eventBanner}" class="img-fluid" alt="Event Banner" style="width:100%; height:500px">
+                </div>
+            </div>
+               
+                
+           
+            `
+                document.getElementById('fulleventdataCon').append(div)
+            })
+        
+
+          
+    </script>
+</body>
+
+</html>

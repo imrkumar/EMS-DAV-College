@@ -5,13 +5,8 @@ let multer = require("multer");
 let mongoClient = require("mongodb").MongoClient;
 let bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
-<<<<<<< HEAD
-//  let connectionString = "mongodb://127.0.0.1:27017";
-   let connectionString = "mongodb+srv://rahulkumar:rk@cluster0.ozruczv.mongodb.net/";
-=======
-let connectionString = "mongodb://127.0.0.1:27017";
-// let connectionString = "mongodb+srv://rahulkumar:rk@cluster0.ozruczv.mongodb.net/";
->>>>>>> 7d1ce012680f82f8acad293470545551bd3fa01f
+ let connectionString = "mongodb://127.0.0.1:27017";
+  //  let connectionString = "mongodb+srv://rahulkumar:rk@cluster0.ozruczv.mongodb.net/";
 let path = require('path');
 let jwt = require("jsonwebtoken");
 require("dotenv").config();
