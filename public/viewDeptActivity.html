@@ -5,11 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Department Data</title>
     <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" />
-   
+    <link rel="icon" href="images/icon.jpg">
     <link rel="stylesheet" href="CSS/style.css">
     <style>
         .decoration {
             text-decoration: none;    
+        }
+        #back a{
+            text-decoration: none;
+            color: white;
         }
     </style>
 </head>
@@ -18,6 +22,7 @@
         <select  id="dept" required onchange="loadDepartmentData()">
             <option value="">Select Department</option>
         </select>
+        <button class="btn btn-danger " id="back" ><a href="./deptDashboard.html  ">BACK</a> </button>
     </div>
     <div class="main" id="viewFullData">
 

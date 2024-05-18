@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,23 +7,21 @@
   <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" />
   <link rel="stylesheet" href="/node_modules/bootstrap-icons/font/bootstrap-icons.css" />
   <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-  <link rel="icon" href="images/logo.png">
+  <link rel="icon" href="images/icon.jpg">
   <style>
     #container {
       width: 890px;
       height: 100vh;
       margin-top: 10px;
     }
-
     form {
       border: 1px solid;
       padding: 20px;
     }
   </style>
 </head>
-
 <body onload="loadEventData()">
-  <div class="container-fluid" id="container">
+  <div class="container-fluid" id="Updatecontainer">
     <form class="border border-dark p-lg-5 rounded-3" id="Data" enctype="multipart/form-data">
       <h2 class="mb-4" style="text-align: center;">UPDATE DEPARTMENT ACTIVITY</h2>
       <dl>
@@ -32,9 +29,14 @@
         <dd><input type="text" class="form-control" id="department" name="department" readonly></dd>
         <dt><label class="form-label" for="eventDate">EVENT DATE</label></dt>
         <dd><input type="date" class="form-control" id="eventDate" name="eventDate"></dd>
-        <dt><label class="form-label" for="eventNotice">EVENT NOTICE</label></dt>
-        <dd><input type="file" class="form-control" id="eventNotice" name="eventNotice"></dd>
-        <!-- Add other input fields here -->
+        
+        <dt><label class="form-label" for="eventBanner">EVENT BANNER</label></dt>
+        <dd>
+          <input type="file" class="form-control" id="eventBanner" name="eventBanner">
+         
+          <img id="currentBanner"  src="" alt="Event Banner" class="img-fluid" style="width:100%; height:500px">
+        </dd>
+        
       </dl>
       <div class="text-center mt-4">
         <button id="submit" class="btn btn-success text-white">UPDATE</button>
@@ -44,24 +46,34 @@
 
   <script>
     function loadEventData() {
-      // Get the event ID from the URL or from wherever you have it stored
-      const eventId = 'your_event_id'; // Replace 'your_event_id' with the actual event ID
+      const url = new URL(window.location.href);
+      const documentId = url.searchParams.get('id');
       
-      // Fetch event data based on event ID
-      fetch(`/getEventDataById/${eventId}`)
-        .then(response => response.json())
-        .then(data => {
-          // Populate form fields with event data
-          document.getElementById('department').value = data.department;
-          document.getElementById('eventDate').value = data.eventDate;
-          // Populate other form fields similarly
-        })
-        .catch(error => {
-          console.error('Error fetching event data:', error);
-          // Handle error if necessary
-        });
+      if (!documentId) {
+        console.error('No event ID found in the URL');
+        return;
+      }
+
+      fetch(`http://localhost:9090/event/${documentId}`, {
+        method: "GET",
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.length > 0) {
+          const eventData = data[0];
+          document.getElementById('department').value = eventData.department;
+          document.getElementById('eventDate').value = eventData.eventDate;
+          document.getElementById('currentBanner').src = eventData.eventBanner;
+          // Populate other fields similarly if needed
+        } else {
+          console.error('No event data found for the given ID');
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching event data:', error);
+      });
     }
   </script>
 </body>
-
 </html>
+

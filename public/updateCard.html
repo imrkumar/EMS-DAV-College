@@ -3,15 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Department-wise Events</title>
+    <title>Department Data</title>
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="icon" href="images/icon.jpg">
     <style>
-        /* Basic CSS for styling */
-        .event-card {
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            padding: 10px;
-            margin-bottom: 10px;
-            cursor: pointer;
+        .decoration {
+            text-decoration: none;
         }
     </style>
 </head>
@@ -21,10 +19,7 @@
             <option value="">Select Department</option>
         </select>
     </div>
-    <div id="events-container">
-        <!-- Event cards will be dynamically populated here -->
-    </div>
-
+    <div class="main" id="viewFullData"></div>
     <script>
         function loadDepartment() {
             fetch("http://localhost:9090/department", {
@@ -34,46 +29,66 @@
             .then(data => {
                 const deptSelect = document.getElementById("dept");
                 data.forEach(item => {
-                    var option = document.createElement("option");
+                    const option = document.createElement("option");
                     option.value = item.department;
                     option.textContent = item.department;
                     deptSelect.appendChild(option);
                 });
+            })
+            .catch(error => {
+                console.error('Error fetching departments:', error);
             });
         }
 
         function loadDepartmentData() {
-            const selectedDepartment = document.getElementById("dept").value;
-            fetch(`http://localhost:9090/getEventData/${selectedDepartment}`, {
-                method: "GET",
-            })
-            .then(response => response.json())
-            .then(events => {
-                const eventsContainer = document.getElementById('events-container');
-                eventsContainer.innerHTML = ''; // Clear previous content
-                events.forEach(event => {
-                    const eventCard = document.createElement('div');
-                    eventCard.classList.add('event-card');
-                    eventCard.innerHTML = `
-                        <h2>${event.eventName}</h2>
-                        <p>Date: ${event.eventDate}</p>
-                        <!-- Add more event details here -->
-                    `;
-                    // Add click event listener to redirect to update form
-                    eventCard.addEventListener('click', () => redirectToUpdateForm(event._id));
-                    eventsContainer.appendChild(eventCard);
+            const selectedDept = document.getElementById("dept").value;
+            if (selectedDept) {
+                fetch(`http://localhost:9090/getEventData/${selectedDept}`, {
+                    method: "GET",
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const viewFullData = document.getElementById("viewFullData");
+                    let html = '';
+                    data.forEach(event => {
+                        html += `
+                            <a href="./updateDeptActivity.html?id=${event._id}" class="decoration">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <img src="${event.eventBanner}" width="100%">
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="card-text text-center fw-bold" style="color:#a24236; font-size:22px;">
+                                            ${event.eventName}
+                                        </p>
+                                        <p class="card-text">
+                                            <span class="fw-bold badge-secondary">Event Incharge :</span> ${event.resourcePerson}
+                                        </p>
+                                        <p class="card-text">
+                                            <span class="fw-bold">Event Date :</span> ${event.eventDate}
+                                        </p>
+                                        <button class="btn btn-success" style="position:absolute; right:25px;">UPDATE</button>
+                                    </div>
+                                </div>
+                            </a>
+                        `;
+                    });
+                    viewFullData.innerHTML = html;
+                })
+                .catch(error => {
+                    console.error('Error fetching department data:', error);
                 });
-            })
-            .catch(error => {
-                console.error('Error fetching event data:', error);
-                // Handle error if necessary
-            });
-        }
-
-        // Function to redirect to the update form page with event ID parameter
-        function redirectToUpdateForm(eventId) {
-            window.location.href = `./updateDeptActivity.html/${eventId}`;
+            } else {
+                const viewFullData = document.getElementById("viewFullData");
+                viewFullData.innerHTML = '';
+            }
         }
     </script>
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
