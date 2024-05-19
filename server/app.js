@@ -13,6 +13,7 @@ require("dotenv").config();
 let port = process.env.PORT || 9090;
 const { ObjectId } = require("mongodb");
 const { event } = require("jquery");
+const { log } = require("console");
 app.use(bodyParser.json());
 app.use(cors());
 
@@ -480,6 +481,47 @@ app.listen(port, (err) => {
 
 // update code
 
+// app.put("/department/activity/update/:id", upload.fields([
+//   { name: "eventNotice", maxCount: 1 },
+//   { name: "eventBanner", maxCount: 1 },
+//   { name: "attendance", maxCount: 1 },
+//   { name: "eventPic", maxCount: 10 },
+//   { name: "mediaCoverage", maxCount: 10 },
+// ]),
+// (req, res) => {
+//   let data = {
+//     departent : req.body.departent,
+//     eventDate: req.body.eventDate,
+//     eventNotice: req.files["eventNotice"][0].path,
+//     eventBanner: req.files["eventBanner"][0].path,
+//     eventName: req.body.eventName,
+//     resourcePerson: req.body.resourcePerson,
+//     briefIntro: req.body.briefIntro,
+
+//     eventReport: req.body.eventReport,
+//     attendance: req.files["attendance"][0].path,
+//     eventPic: req.files["eventPic"].map((file) => file.path),
+//     mediaCoverage: req.files["mediaCoverage"].map((file) => file.path),
+//   };
+//   console.log(data)
+//   mongoClient.connect(connectionString, (err, clientObject) => {
+//     if (!err) {
+//       let dbo = clientObject.db("DavEms");
+//       dbo.collection("DeptActivity").updateOne( {_id: ObjectId(id) }, { $set: data }, (err, result) => {
+//         if (!err) {
+//           console.log("record updated successfully");
+//         }
+//       });
+//     }
+//   });
+//   console.log(req.body, req.file);
+
+//   res.send("data received successfully"); 
+// }
+// );
+
+
+
 app.put("/department/activity/update/:id", upload.fields([
   { name: "eventNotice", maxCount: 1 },
   { name: "eventBanner", maxCount: 1 },
@@ -489,31 +531,41 @@ app.put("/department/activity/update/:id", upload.fields([
 ]),
 (req, res) => {
   let data = {
-    departent : req.body.departent,
+    department: req.body.department,
     eventDate: req.body.eventDate,
-    eventNotice: req.files["eventNotice"][0].path,
-    eventBanner: req.files["eventBanner"][0].path,
+    eventNotice: req.files["eventNotice"] ? req.files["eventNotice"][0].path : null,
+    eventBanner: req.files["eventBanner"] ? req.files["eventBanner"][0].path : null,
     eventName: req.body.eventName,
     resourcePerson: req.body.resourcePerson,
     briefIntro: req.body.briefIntro,
-
     eventReport: req.body.eventReport,
-    attendance: req.files["attendance"][0].path,
-    eventPic: req.files["eventPic"].map((file) => file.path),
-    mediaCoverage: req.files["mediaCoverage"].map((file) => file.path),
+    attendance: req.files["attendance"] ? req.files["attendance"][0].path : null,
+    eventPic: req.files["eventPic"] ? req.files["eventPic"].map((file) => file.path) : [],
+    mediaCoverage: req.files["mediaCoverage"] ? req.files["mediaCoverage"].map((file) => file.path) : [],
   };
+
+  console.log(data);
+
   mongoClient.connect(connectionString, (err, clientObject) => {
     if (!err) {
       let dbo = clientObject.db("DavEms");
-      dbo.collection("DeptActivity").updateOne( {_id: ObjectId(id) }, { $set: data }, (err, result) => {
-        if (!err) {
-          console.log("record updated successfully");
+      dbo.collection("DeptActivity").updateOne(
+        { _id: ObjectId(req.params.id) }, 
+        { $set: data }, 
+        (err, result) => {
+          if (!err) {
+            console.log("Record updated successfully");
+          } else {
+            console.error("Error updating record:", err);
+          }
+          clientObject.close();
         }
-      });
+      );
+    } else {
+      console.error("Error connecting to MongoDB:", err);
     }
   });
-  console.log(req.body, req.file);
 
-  res.send("data received successfully");
-}
-);
+  res.send("Data received successfully");
+});
+
